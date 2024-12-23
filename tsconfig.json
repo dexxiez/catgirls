@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@catgirls/*": ["packages/*/src"]
+    }
+  },
+  "references": [
+    {
+      "path": "packages/env"
+    }
+  ],
+  "files": [],
+  "include": []
+}

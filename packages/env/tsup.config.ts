@@ -10,7 +10,9 @@ export default defineConfig({
     },
   },
   minify: true,
+  sourcemap: true,
   splitting: true,
+  treeshake: true,
   clean: true,
   external: ["zod"],
 });

@@ -29,8 +29,7 @@ export const createClientEnv = <T extends Record<string, unknown>>(
   for (const [key, validator] of Object.entries(config)) {
     const envKey = `NEXT_PUBLIC_${key}`;
     const rawValue = process.env[envKey];
-
-    if (rawValue === undefined) {
+    if (rawValue === undefined && !validator.schema.isOptional()) {
       errors.push({ key, message: `Missing environment variable: ${envKey}` });
       continue;
     }

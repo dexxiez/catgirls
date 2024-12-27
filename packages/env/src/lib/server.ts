@@ -37,7 +37,7 @@ export const createServerEnv = <T extends Record<string, unknown>>(
   for (const [key, validator] of Object.entries(config)) {
     const rawValue = process.env[key];
 
-    if (rawValue === undefined) {
+    if (rawValue === undefined && !validator.schema.isOptional()) {
       errors.push({ key, message: `Missing environment variable: ${key}` });
       continue;
     }

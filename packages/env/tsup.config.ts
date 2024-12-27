@@ -11,7 +11,6 @@ export default defineConfig({
   },
   minify: true,
   splitting: true,
-  sourcemap: true,
   clean: true,
   external: ["zod"],
 });

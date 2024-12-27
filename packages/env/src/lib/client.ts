@@ -27,7 +27,7 @@ export const createClientEnv = <T extends Record<string, unknown>>(
   const errors: Array<{ key: string; message: string }> = [];
 
   for (const [key, validator] of Object.entries(config)) {
-    const envKey = `NEXT_PUBLIC_${key}`; // or whatever prefix you want
+    const envKey = `NEXT_PUBLIC_${key}`;
     const rawValue = process.env[envKey];
 
     if (rawValue === undefined) {

@@ -4,12 +4,27 @@ import {
   GenerationStats,
   IHttpClient,
   IStreamHandler,
+  Message,
   QueryResponseModel,
   Request,
 } from "../types";
 import { OpenRouterErrorAdapter } from "./error-adapter";
 import { HttpClient } from "./http-client";
 import { StreamHandler } from "./stream-handler";
+
+type BaseRequest = Omit<Request, "messages" | "prompt">;
+
+type MessagesRequest = BaseRequest & {
+  messages: Message[];
+  prompt?: never;
+};
+
+type PromptRequest = BaseRequest & {
+  prompt: string;
+  messages?: never;
+};
+
+type CompletionRequest = MessagesRequest | PromptRequest;
 
 export class OpenRouterClient {
   private readonly baseURL = "https://openrouter.ai/api/v1";
@@ -47,9 +62,12 @@ export class OpenRouterClient {
     return headers;
   }
 
-  async chatCompletion<T extends boolean = false>(
-    options: Request & { stream?: T },
-  ): Promise<ChatCompletionResult<T>> {
+  async chatCompletion<
+    TStreaming extends boolean = false,
+    TRequest extends CompletionRequest = CompletionRequest,
+  >(
+    options: TRequest & { stream?: TStreaming },
+  ): Promise<ChatCompletionResult<TStreaming, TRequest>> {
     try {
       const data = {
         ...options,
@@ -62,13 +80,15 @@ export class OpenRouterClient {
           responseType: "stream",
           signal: options.signal,
         });
+        // We know it's an EventEmitter if streaming is true
         return this.streamHandler.handleStream(
           response.data,
-        ) as ChatCompletionResult<T>;
+        ) as ChatCompletionResult<TStreaming, TRequest>;
       }
 
       const response = await this.httpClient.post("/chat/completions", data);
-      return response.data as ChatCompletionResult<T>;
+      // TypeScript will infer the correct type based on the request shape
+      return response.data as ChatCompletionResult<TStreaming, TRequest>;
     } catch (error) {
       throw OpenRouterErrorAdapter.handleError(error);
     }

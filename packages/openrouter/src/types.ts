@@ -387,27 +387,87 @@ export interface ProviderPreferences {
   quantizations?: Quantization[] | null;
 }
 
-export type ChatCompletionResult<T extends boolean> = T extends true
-  ? EventEmitter
-  : ChatCompletionResponse;
+type BaseRequest = {
+  model?: string;
+  stream?: boolean;
+  temperature?: number;
+  // ... other common fields
+};
 
-export type ChatCompletionResponse = {
+// Discriminated union for the request
+type CompletionRequest =
+  | (BaseRequest & {
+      messages: Message[];
+      prompt?: undefined; // Force it to be undefined
+    })
+  | (BaseRequest & {
+      prompt: string;
+      messages?: undefined; // Force it to be undefined
+    });
+
+// Now for the responses...
+// Common fields that appear in all responses
+type BaseResponse = {
   id: string;
-  // Depending on whether you set "stream" to "true" and
-  // whether you passed in "messages" or a "prompt", you
-  // will get a different output shape
-  choices: (NonStreamingChoice | StreamingChoice | NonChatChoice)[];
-  created: number; // Unix timestamp
+  provider: string;
   model: string;
-  object: "chat.completion" | "chat.completion.chunk";
-
-  system_fingerprint?: string; // Only present if the provider supports it
-
-  // Usage data is always returned for non-streaming.
-  // When streaming, you will get one usage object at
-  // the end accompanied by an empty choices array.
+  created: number;
+  system_fingerprint: string;
   usage?: ResponseUsage;
 };
+
+// Non-streaming message-based response
+type MessageBasedResponse = BaseResponse & {
+  object: "chat.completion";
+  choices: Array<{
+    logprobs: null;
+    finish_reason: string | null;
+    index?: number;
+    message: {
+      role: string;
+      content: string;
+      refusal?: string;
+    };
+    text: never;
+  }>;
+};
+
+// Non-streaming prompt-based response
+type PromptBasedResponse = BaseResponse & {
+  object: "chat.completion";
+  choices: Array<{
+    logprobs: null;
+    finish_reason: string | null;
+    index?: number;
+    text: string;
+    message: never;
+  }>;
+};
+
+// Streaming chunk response
+export type StreamingResponse = BaseResponse & {
+  object: "chat.completion.chunk";
+  choices: Array<{
+    index: number;
+    finish_reason: string | null;
+    delta: {
+      content?: string;
+      role?: string;
+      tool_calls?: ToolCall[];
+    };
+    error?: ErrorResponse;
+  }>;
+};
+
+// Now the main type that ties it all together
+export type ChatCompletionResult<
+  TStreaming extends boolean,
+  TRequest extends CompletionRequest,
+> = TStreaming extends true
+  ? EventEmitter
+  : TRequest extends { messages: Message[] }
+    ? MessageBasedResponse
+    : PromptBasedResponse;
 
 // If the provider returns usage, we pass it down
 // as-is. Otherwise, we count using the GPT-4 tokenizer.
@@ -422,31 +482,6 @@ type ResponseUsage = {
 };
 
 // Subtypes:
-type NonChatChoice = {
-  finish_reason: string | null;
-  text: string;
-  error?: ErrorResponse;
-};
-
-type NonStreamingChoice = {
-  finish_reason: string | null; // Depends on the model. Ex: 'stop' | 'length' | 'content_filter' | 'tool_calls'
-  message: {
-    content: string | null;
-    role: string;
-    tool_calls?: ToolCall[];
-  };
-  error?: ErrorResponse;
-};
-
-type StreamingChoice = {
-  finish_reason: string | null;
-  delta: {
-    content: string | null;
-    role?: string;
-    tool_calls?: ToolCall[];
-  };
-  error?: ErrorResponse;
-};
 
 type ErrorResponse = {
   code: number; // See "Error Handling" section

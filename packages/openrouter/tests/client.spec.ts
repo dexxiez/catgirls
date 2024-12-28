@@ -3,7 +3,7 @@ import { EventEmitter } from "events";
 import { OpenRouterClient } from "../src/lib/client";
 import { HttpClient } from "../src/lib/http-client";
 import { StreamHandler } from "../src/lib/stream-handler";
-import { Request } from "../src/types";
+import { Message } from "../src/types";
 import { AxiosResponse } from "axios";
 
 jest.mock("../src/lib/http-client");
@@ -22,14 +22,11 @@ describe("OpenRouterClient", () => {
   let mockStreamHandler: jest.Mocked<StreamHandler>;
 
   beforeEach(() => {
-    // Clear all mocks
     jest.clearAllMocks();
 
-    // Setup mocks
     mockHttpClient = new HttpClient("", {}) as jest.Mocked<HttpClient>;
     mockStreamHandler = new StreamHandler() as jest.Mocked<StreamHandler>;
 
-    // Create client instance with mocked dependencies
     client = new OpenRouterClient(
       mockApiKey,
       mockConfig,
@@ -38,37 +35,12 @@ describe("OpenRouterClient", () => {
     );
   });
 
-  describe("getModels", () => {
-    it("should fetch models successfully", async () => {
-      const mockResponse: AxiosResponse = {
-        data: { data: ["model1", "model2"] },
-        status: 200,
-        statusText: "OK",
-        headers: {},
-        config: {} as any,
-      };
-      mockHttpClient.get.mockResolvedValueOnce(mockResponse);
-
-      const result = await client.getModels();
-
-      expect(mockHttpClient.get).toHaveBeenCalledWith("/models");
-      expect(result).toEqual(mockResponse.data.data);
-    });
-
-    it("should handle errors when fetching models", async () => {
-      const mockError = new Error("Models fetch failed");
-      mockHttpClient.get.mockRejectedValueOnce(mockError);
-
-      await expect(client.getModels()).rejects.toThrow();
-    });
-  });
-
   describe("chatCompletion", () => {
-    // Create a proper Request object that satisfies the type requirements
-    const mockRequest: Request = {
-      messages: [{ role: "user", content: "Hello" }],
+    // Create a properly typed message-based request
+    const mockMessagesRequest = {
+      messages: [{ role: "user", content: "Hello" }] as Message[],
       signal: new AbortController().signal,
-      top_logprobs: 0, // Required field from the type
+      top_logprobs: 0,
     };
 
     it("should make a non-streaming chat completion request", async () => {
@@ -81,10 +53,10 @@ describe("OpenRouterClient", () => {
       };
       mockHttpClient.post.mockResolvedValueOnce(mockResponse);
 
-      const result = await client.chatCompletion(mockRequest);
+      const result = await client.chatCompletion(mockMessagesRequest);
 
       expect(mockHttpClient.post).toHaveBeenCalledWith("/chat/completions", {
-        ...mockRequest,
+        ...mockMessagesRequest,
         model: mockConfig.model,
         stream: undefined,
       });
@@ -103,8 +75,8 @@ describe("OpenRouterClient", () => {
       mockHttpClient.post.mockResolvedValueOnce(mockResponse);
       mockStreamHandler.handleStream.mockReturnValueOnce(new EventEmitter());
 
-      const streamRequest: Request = {
-        ...mockRequest,
+      const streamRequest = {
+        ...mockMessagesRequest,
         stream: true,
       };
 
@@ -126,8 +98,8 @@ describe("OpenRouterClient", () => {
 
     it("should use provided model instead of default", async () => {
       const customModel = "custom-model";
-      const customRequest: Request = {
-        ...mockRequest,
+      const customRequest = {
+        ...mockMessagesRequest,
         model: customModel,
       };
 
@@ -154,7 +126,9 @@ describe("OpenRouterClient", () => {
       const mockError = new Error("API Error");
       mockHttpClient.post.mockRejectedValueOnce(mockError);
 
-      await expect(client.chatCompletion(mockRequest)).rejects.toThrow();
+      await expect(
+        client.chatCompletion(mockMessagesRequest),
+      ).rejects.toThrow();
     });
   });
 

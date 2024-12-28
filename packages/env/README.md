@@ -1,6 +1,6 @@
 # @catgirls/env 🐱
 
-_Nyaa~! Environment variables, but make them type-safe! ^\_^_
+Nyaa~! Environment variables, but make them type-safe! •⩊•
 
 ## What's This? uwu
 

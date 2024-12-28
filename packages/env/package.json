@@ -1,10 +1,18 @@
 {
   "name": "@catgirls/env",
-  "version": "0.1.3",
+  "version": "1.0.0-beta.1",
+  "description": "Nyaa~! Environment variables, but make them type-safe! •⩊•",
+  "author": "Dezziez",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "license": "MIT",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest",
@@ -17,7 +25,17 @@
   "devDependencies": {
     "zod": "^3.0.0"
   },
-  "files": [
-    "dist"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cosmic-Tiger-AU/nyaa.git",
+    "directory": "packages/env"
+  },
+  "keywords": [
+    "env",
+    "environment",
+    "variables",
+    "parser",
+    "uwu",
+    "catgirl"
   ]
 }

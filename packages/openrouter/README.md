@@ -170,5 +170,6 @@ MIT - As free as a cat in a cardboard box! 🐱
 
 ---
 
-_Made with <3 by catgirls from Vatican City_
+_made with <3 by catgirls from vatican city_
+
 **purrs contentedly at well-typed API calls**

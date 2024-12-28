@@ -1,3 +1,5 @@
+// ! Generated file, do not modify by hand. See packages/openrouter/scripts/generate-models.ts
+
 export type RouterModel =
   /** DeepSeek V3 */
   | "deepseek/deepseek-chat"

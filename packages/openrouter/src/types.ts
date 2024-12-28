@@ -177,7 +177,7 @@ export type Request = {
    * Must be an integer
    * @optional
    */
-  top_logprobs: number;
+  top_logprobs?: number;
 
   /**
    * Minimum probability threshold for token selection

@@ -14,7 +14,9 @@ const renderTypeWithComment = (id: string, name: string) => {
 
 const renderTypeFile = async () => {
   const models = await getModels();
-  const render = `export type RouterModel = 
+  const render = `// ! Generated file, do not modify by hand. See packages/openrouter/scripts/generate-models.ts
+
+  export type RouterModel = 
 	  ${models.map((model) => renderTypeWithComment(model.id, model.name)).join("\n")}
   	| (string & {});`;
   return render;

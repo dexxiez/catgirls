@@ -115,5 +115,6 @@ MIT - Go wild! ₍⸍⸌̣ʷ̣̫⸍̣⸌₎
 
 ---
 
-_Made with <3 by catgirls from Vatican City_
+_made with <3 by catgirls from vatican city_
+
 **purrs contentedly at well-typed environment variables**

@@ -1,7 +1,7 @@
 {
   "name": "@catgirls/openrouter",
-  "version": "1.0.0-beta.1",
-  "description": "Nyaa~! OpenRouter Client for Cool Cats! •⩊•",
+  "version": "1.0.0-beta.2",
+  "description": "Nyaa~! A TypeScript client for OpenRouter that's both kawaii and powerful! 😻",
   "author": "Dezziez",
   "license": "MIT",
   "main": "dist/index.js",

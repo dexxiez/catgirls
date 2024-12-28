@@ -1,3 +1,4 @@
+import { RouterModel } from "../models";
 import {
   IHttpClient,
   IStreamHandler,
@@ -18,7 +19,7 @@ export class OpenRouterClient {
     private readonly defaultConfig: {
       siteUrl?: string;
       siteName?: string;
-      model?: string;
+      model?: RouterModel;
     } = {},
     httpClient?: IHttpClient,
     streamHandler?: IStreamHandler,

@@ -1,6 +1,6 @@
 {
   "name": "@catgirls/env",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Nyaa~! Environment variables, but make them type-safe! •⩊•",
   "author": "Dezziez",
   "license": "MIT",
@@ -27,7 +27,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cosmic-Tiger-AU/nyaa.git",
+    "url": "git+https://github.com/dexxiez/catgirls.git",
     "directory": "packages/env"
   },
   "keywords": [

@@ -1,5 +1,7 @@
 import { RouterModel } from "../models";
 import {
+  ChatCompletionResult,
+  GenerationStats,
   IHttpClient,
   IStreamHandler,
   QueryResponseModel,
@@ -45,7 +47,9 @@ export class OpenRouterClient {
     return headers;
   }
 
-  async chatCompletion(options: Request) {
+  async chatCompletion<T extends boolean = false>(
+    options: Request & { stream?: T },
+  ): Promise<ChatCompletionResult<T>> {
     try {
       const data = {
         ...options,
@@ -58,22 +62,24 @@ export class OpenRouterClient {
           responseType: "stream",
           signal: options.signal,
         });
-        return this.streamHandler.handleStream(response.data);
+        return this.streamHandler.handleStream(
+          response.data,
+        ) as ChatCompletionResult<T>;
       }
 
       const response = await this.httpClient.post("/chat/completions", data);
-      return response.data;
+      return response.data as ChatCompletionResult<T>;
     } catch (error) {
       throw OpenRouterErrorAdapter.handleError(error);
     }
   }
 
-  async getGenerationStats(generationId: string) {
+  async getGenerationStats(generationId: string): Promise<GenerationStats> {
     try {
       const response = await this.httpClient.get(
         `/generation?id=${generationId}`,
       );
-      return response.data;
+      return response.data.data; // i shit you not
     } catch (error) {
       throw OpenRouterErrorAdapter.handleError(error);
     }

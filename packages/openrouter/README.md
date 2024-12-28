@@ -6,7 +6,7 @@ Nyaa~! A TypeScript client for OpenRouter that's both kawaii and powerful! (ﾉ�
 
 A fully typed, streaming-capable OpenRouter API client that makes working with AI models as comfy as curling up in a warm sunbeam! You get:
 
-- Full TypeScript types for all API parameters and responses 📝
+- Full TypeScript types for all API parameters (including models!) and responses 📝
 - Streaming support with EventEmitter interface 🌊
 - Built-in error handling with pretty messages 💝
 - Automatic retries and fallbacks across providers 🔄
@@ -26,29 +26,35 @@ _wiggles ears excitedly_
 Basic chat completion:
 
 ```typescript
-import { OpenRouterClient } from '@catgirls/openrouter';
+import { OpenRouterClient } from "@catgirls/openrouter";
 
-const client = new OpenRouterClient('your-api-key', {
-  siteName: 'My Kawaii App', // Optional
-  siteUrl: 'https://nyaa.example.com' // Optional
-  model: 'coolest/catgirl420.69' // Choose now, or later!
+const client = new OpenRouterClient("your-api-key", {
+  siteName: "My Kawaii App", // Optional
+  siteUrl: "https://nyaa.example.com", // Optional
+  model: "anthropic/claude-3-opus", // Default model or choose later!
 });
 
 // Simple completion
 const response = await client.chatCompletion({
-  messages: [{ role: 'user', content: 'Explain quantum physics!' }],
-  model: 'anthropic/claude-3-opus',
+  messages: [{ role: "user", content: "Explain quantum physics!" }],
 });
 
-// Streaming for realtime responses! *purrs*
+// Streaming with full event support! *purrs*
 const stream = await client.chatCompletion({
-  messages: [{ role: 'user', content: 'Write me a story!' }],
-  model: 'anthropic/claude-3-opus',
-  stream: true
+  messages: [{ role: "user", content: "Write me a story!" }],
+  stream: true,
 });
 
-stream.on('token', (token) => console.log('Nyaa~', token));
-stream.on('done', () => console.log('All done! *stretches*'));
+// Basic token streaming
+stream.on("token", (token) => console.log("Nyaa~", token));
+
+// Advanced events for clingy control freaks!
+stream.on("content", (content) => console.log("Content:", content));
+stream.on("role", (role) => console.log("Role change:", role));
+stream.on("tool_calls", (tools) => console.log("Tool called:", tools));
+stream.on("finish", (reason) => console.log("Finished because:", reason));
+stream.on("usage", (stats) => console.log("Token usage:", stats));
+stream.on("done", () => console.log("All done! *stretches*"));
 ```
 
 ## Advanced Features (｡♥‿♥｡)
@@ -63,13 +69,44 @@ const response = await client.chatCompletion({
   provider: {
     // Only use providers that don't store data
     data_collection: 'deny',
+    // Allow fallback to other providers
+    allow_fallbacks: true,
+    // Require all parameters to be supported
+    require_parameters: true,
     // Preferred provider order
     order: ['Anthropic', 'OpenAI', 'Google'],
     // Skip these providers
     ignore: ['DeepInfra'],
-    // Only use high-precision models
-    quantizations: ['fp16', 'fp32']
+    // Only use specific quantizations
+    quantizations: ['fp16', 'bf16']
   }
+});
+```
+
+### Message Content Types
+
+Support for both text and image inputs:
+
+```typescript
+const response = await client.chatCompletion({
+  messages: [
+    {
+      role: 'user',
+      content: [
+        {
+          type: 'text',
+          text: 'What's in this image?'
+        },
+        {
+          type: 'image_url',
+          image_url: {
+            url: 'data:image/jpeg;base64,...',
+            detail: 'auto'  // Optional detail level
+          }
+        }
+      ]
+    }
+  ]
 });
 ```
 
@@ -92,35 +129,9 @@ const response = await client.chatCompletion({
         }
       }
     }
-  }]
+  }],
+  tool_choice: 'auto' // or 'none', or { type: 'function', function: { name: 'specific_function' } }
 });
-```
-
-### Response Formats
-
-Force structured outputs:
-
-```typescript
-const response = await client.chatCompletion({
-  messages: [...],
-  response_format: {
-    type: 'json_object'
-  }
-});
-```
-
-## Error Handling
-
-We make errors less scary with detailed messages:
-
-```typescript
-try {
-  await client.chatCompletion({...});
-} catch (error) {
-  // Pretty error messages with provider details!
-  // Example: "Provider error: Claude is taking a cat nap (503)"
-  console.error(error.message);
-}
 ```
 
 ## API Reference
@@ -128,41 +139,58 @@ try {
 ### OpenRouterClient
 
 ```typescript
-new OpenRouterClient(
-  apiKey: string,
-  config?: {
-    siteUrl?: string;    // Your site URL
-    siteName?: string;   // Your site name
-    model?: string;      // Default model
-  }
-)
+class OpenRouterClient {
+  constructor(
+    apiKey: string,
+    config?: {
+      siteUrl?: string; // Your site URL
+      siteName?: string; // Your site name
+      model?: RouterModel; // Default model ID
+    },
+    httpClient?: IHttpClient, // Optional custom HTTP client
+    streamHandler?: IStreamHandler, // Optional custom stream handler
+  );
+
+  // Core methods
+  async chatCompletion<T extends boolean = false>(
+    options: Request & { stream?: T },
+  ): Promise<ChatCompletionResult<T>>;
+
+  async getGenerationStats(generationId: string): Promise<GenerationStats>;
+
+  async getModels(): Promise<QueryResponseModel[]>;
+}
 ```
 
-### chatCompletion Options
+### ChatCompletion Options
 
-All the options you can pass:
+Key configuration options:
 
 ```typescript
 interface Request {
-  messages: Message[]; // Chat messages
-  model?: string; // Model ID
+  messages?: Message[]; // Chat messages
+  prompt?: string; // Or use raw prompt
+  model?: RouterModel; // Model ID
   stream?: boolean; // Enable streaming
   max_tokens?: number; // Max response length
   temperature?: number; // Randomness (0-2)
   tools?: Tool[]; // Function calling
+  tool_choice?: ToolChoice; // Tool selection strategy
   stop?: string | string[]; // Stop sequences
-  // ... and many more advanced options!
+  response_format?: {
+    // Force output format
+    type: "json_object";
+  };
+
+  // Advanced options
+  transforms?: string[]; // Prompt transformations
+  models?: RouterModel[]; // Fallback models
+  route?: "fallback"; // Routing strategy
+  provider?: ProviderPreferences; // Provider control
+
+  // And many more! Check the types for full details
 }
 ```
-
-## Why This? (=^･ω･^=)
-
-Because talking to AI should be as easy as petting a cat! No more dealing with:
-
-- Manual stream parsing _hisses at raw EventSource_
-- Provider-specific error formats
-- Complex fallback logic
-- Type mismatches
 
 ## License
 

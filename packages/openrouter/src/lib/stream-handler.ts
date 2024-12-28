@@ -14,7 +14,13 @@ export class StreamHandler implements IStreamHandler {
       buffer = lines.pop() || "";
 
       for (const line of lines) {
-        if (line.trim() === "" || line.startsWith(":")) continue;
+        if (line.trim() === "" || line.startsWith(":")) {
+          // Handle SSE comments (OpenRouter processing messages)
+          if (line.includes("OPENROUTER PROCESSING")) {
+            eventEmitter.emit("processing");
+          }
+          continue;
+        }
 
         try {
           const message = line.replace(/^data: /, "");
@@ -24,9 +30,42 @@ export class StreamHandler implements IStreamHandler {
           }
 
           const parsed = JSON.parse(message);
-          const content = parsed.choices[0]?.delta?.content;
-          if (content) {
-            eventEmitter.emit("token", content);
+
+          // Emit the full chunk for raw access
+          eventEmitter.emit("chunk", parsed);
+
+          // Handle the standardized response format
+          if (parsed.choices?.[0]) {
+            const choice = parsed.choices[0];
+
+            // For streaming responses, we'll get delta updates
+            if (choice.delta) {
+              // Extract the delta components
+              const { content, role, tool_calls } = choice.delta;
+
+              // Emit specific events for different delta types
+              if (content) {
+                // Emit both for backwards compatibility
+                eventEmitter.emit("token", content);
+                eventEmitter.emit("content", content);
+              }
+              if (role) {
+                eventEmitter.emit("role", role);
+              }
+              if (tool_calls) {
+                eventEmitter.emit("tool_calls", tool_calls);
+              }
+            }
+
+            // Handle finish reason if present
+            if (choice.finish_reason) {
+              eventEmitter.emit("finish", choice.finish_reason);
+            }
+          }
+
+          // Handle usage statistics in the final message
+          if (parsed.usage) {
+            eventEmitter.emit("usage", parsed.usage);
           }
         } catch (error) {
           eventEmitter.emit("error", OpenRouterErrorAdapter.handleError(error));

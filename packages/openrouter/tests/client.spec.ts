@@ -176,7 +176,7 @@ describe("OpenRouterClient", () => {
       expect(mockHttpClient.get).toHaveBeenCalledWith(
         `/generation?id=${mockGenerationId}`,
       );
-      expect(result).toEqual(mockResponse.data);
+      expect(result).toEqual(mockResponse.data.data);
     });
 
     it("should handle errors when fetching stats", async () => {

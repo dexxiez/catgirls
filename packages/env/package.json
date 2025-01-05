@@ -1,6 +1,6 @@
 {
   "name": "@catgirls/env",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0",
   "description": "Nyaa~! Environment variables, but make them type-safe! •⩊•",
   "author": "Dezziez",
   "license": "MIT",

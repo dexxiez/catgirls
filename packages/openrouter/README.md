@@ -15,7 +15,7 @@ A fully typed, streaming-capable OpenRouter API client that makes working with A
 ## Installation
 
 ```bash
-pnpm add @catgirls/openrouter
+pnpm add @catgirls/openrouter axios
 # or yarn/npm if you're not as cool as us :3
 ```
 

@@ -1,14 +1,22 @@
 // ! Generated file, do not modify by hand. See packages/openrouter/scripts/generate-models.ts
 
 export type RouterModel =
+  /** MiniMax: MiniMax-01 */
+  | "minimax/minimax-01"
+  /** Mistral: Codestral 2501 */
+  | "mistralai/codestral-2501"
+  /** Microsoft: Phi 4 */
+  | "microsoft/phi-4"
+  /** Sao10K: Llama 3.1 70B Hanami x1 */
+  | "sao10k/l3.1-70b-hanami-x1"
   /** DeepSeek V3 */
   | "deepseek/deepseek-chat"
+  /** Qwen: QvQ 72B Preview */
+  | "qwen/qvq-72b-preview"
   /** Google: Gemini 2.0 Flash Thinking Experimental (free) */
   | "google/gemini-2.0-flash-thinking-exp:free"
   /** Sao10K: Llama 3.3 Euryale 70B */
   | "sao10k/l3.3-euryale-70b"
-  /** Inflatebot: Mag Mell R1 12B */
-  | "inflatebot/mn-mag-mell-r1"
   /** OpenAI: o1 */
   | "openai/o1"
   /** EVA Llama 3.33 70b */
@@ -361,8 +369,6 @@ export type RouterModel =
   | "anthropic/claude-2.1"
   /** OpenHermes 2.5 Mistral 7B */
   | "teknium/openhermes-2.5-mistral-7b"
-  /** lzlv 70B */
-  | "lizpreciatior/lzlv-70b-fp16-hf"
   /** Toppy M 7B (free) */
   | "undi95/toppy-m-7b:free"
   /** Toppy M 7B (nitro) */

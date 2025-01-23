@@ -1,6 +1,10 @@
 // ! Generated file, do not modify by hand. See packages/openrouter/scripts/generate-models.ts
 
 export type RouterModel =
+  /** DeepSeek R1 */
+  | "deepseek/deepseek-r1"
+  /** Rogue Rose 103B v0.2 (free) */
+  | "sophosympatheia/rogue-rose-103b-v0.2:free"
   /** MiniMax: MiniMax-01 */
   | "minimax/minimax-01"
   /** Mistral: Codestral 2501 */
@@ -14,7 +18,7 @@ export type RouterModel =
   /** Qwen: QvQ 72B Preview */
   | "qwen/qvq-72b-preview"
   /** Google: Gemini 2.0 Flash Thinking Experimental (free) */
-  | "google/gemini-2.0-flash-thinking-exp:free"
+  | "google/gemini-2.0-flash-thinking-exp-1219:free"
   /** Sao10K: Llama 3.3 Euryale 70B */
   | "sao10k/l3.3-euryale-70b"
   /** OpenAI: o1 */
@@ -377,7 +381,7 @@ export type RouterModel =
   | "undi95/toppy-m-7b"
   /** Goliath 120B */
   | "alpindale/goliath-120b"
-  /** Auto Router (best for prompt) */
+  /** Auto Router */
   | "openrouter/auto"
   /** OpenAI: GPT-3.5 Turbo 16k (older v1106) */
   | "openai/gpt-3.5-turbo-1106"
@@ -431,6 +435,8 @@ export type RouterModel =
   | "gryphe/mythomax-l2-13b:extended"
   /** Meta: Llama 2 13B Chat */
   | "meta-llama/llama-2-13b-chat"
+  /** Meta: Llama 2 70B Chat */
+  | "meta-llama/llama-2-70b-chat"
   /** OpenAI: GPT-3.5 Turbo */
   | "openai/gpt-3.5-turbo"
   /** OpenAI: GPT-3.5 Turbo 16k */

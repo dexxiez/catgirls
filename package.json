@@ -14,7 +14,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
     "@eslint/js": "^9.17.0",
-    "@types/node": "^22.10.2",
+    "@types/node": "^22.13.5",
     "@typescript-eslint/eslint-plugin": "^8.18.2",
     "@typescript-eslint/parser": "^8.18.2",
     "changeset": "^0.2.6",
@@ -22,8 +22,8 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.2.11",
     "prettier": "^3.4.2",
-    "tsup": "^8.3.5",
-    "typescript": "^5.7.2"
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.3"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",

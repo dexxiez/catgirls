@@ -1,7 +1,81 @@
 // ! Generated file, do not modify by hand. See packages/openrouter/scripts/generate-models.ts
 
 export type RouterModel =
-  /** DeepSeek R1 */
+  /** Google: Gemini 2.0 Flash Lite */
+  | "google/gemini-2.0-flash-lite-001"
+  /** Anthropic: Claude 3.7 Sonnet (self-moderated) */
+  | "anthropic/claude-3.7-sonnet:beta"
+  /** Anthropic: Claude 3.7 Sonnet */
+  | "anthropic/claude-3.7-sonnet"
+  /** Anthropic: Claude 3.7 Sonnet (thinking) */
+  | "anthropic/claude-3.7-sonnet:thinking"
+  /** Perplexity: R1 1776 */
+  | "perplexity/r1-1776"
+  /** Mistral: Saba */
+  | "mistralai/mistral-saba"
+  /** Dolphin3.0 R1 Mistral 24B (free) */
+  | "cognitivecomputations/dolphin3.0-r1-mistral-24b:free"
+  /** Dolphin3.0 Mistral 24B (free) */
+  | "cognitivecomputations/dolphin3.0-mistral-24b:free"
+  /** Llama Guard 3 8B */
+  | "meta-llama/llama-guard-3-8b"
+  /** OpenAI: o3 Mini High */
+  | "openai/o3-mini-high"
+  /** Llama 3.1 Tulu 3 405B */
+  | "allenai/llama-3.1-tulu-3-405b"
+  /** DeepSeek: R1 Distill Llama 8B */
+  | "deepseek/deepseek-r1-distill-llama-8b"
+  /** Google: Gemini Flash 2.0 */
+  | "google/gemini-2.0-flash-001"
+  /** Google: Gemini Flash Lite 2.0 Preview (free) */
+  | "google/gemini-2.0-flash-lite-preview-02-05:free"
+  /** Google: Gemini Pro 2.0 Experimental (free) */
+  | "google/gemini-2.0-pro-exp-02-05:free"
+  /** Qwen: Qwen VL Plus (free) */
+  | "qwen/qwen-vl-plus:free"
+  /** AionLabs: Aion-1.0 */
+  | "aion-labs/aion-1.0"
+  /** AionLabs: Aion-1.0-Mini */
+  | "aion-labs/aion-1.0-mini"
+  /** AionLabs: Aion-RP 1.0 (8B) */
+  | "aion-labs/aion-rp-llama-3.1-8b"
+  /** Qwen: Qwen-Turbo */
+  | "qwen/qwen-turbo"
+  /** Qwen: Qwen2.5 VL 72B Instruct (free) */
+  | "qwen/qwen2.5-vl-72b-instruct:free"
+  /** Qwen: Qwen-Plus */
+  | "qwen/qwen-plus"
+  /** Qwen: Qwen-Max  */
+  | "qwen/qwen-max"
+  /** OpenAI: o3 Mini */
+  | "openai/o3-mini"
+  /** DeepSeek: R1 Distill Qwen 1.5B */
+  | "deepseek/deepseek-r1-distill-qwen-1.5b"
+  /** Mistral: Mistral Small 3 (free) */
+  | "mistralai/mistral-small-24b-instruct-2501:free"
+  /** Mistral: Mistral Small 3 */
+  | "mistralai/mistral-small-24b-instruct-2501"
+  /** DeepSeek: R1 Distill Qwen 32B */
+  | "deepseek/deepseek-r1-distill-qwen-32b"
+  /** DeepSeek: R1 Distill Qwen 14B */
+  | "deepseek/deepseek-r1-distill-qwen-14b"
+  /** Perplexity: Sonar Reasoning */
+  | "perplexity/sonar-reasoning"
+  /** Perplexity: Sonar */
+  | "perplexity/sonar"
+  /** Liquid: LFM 7B */
+  | "liquid/lfm-7b"
+  /** Liquid: LFM 3B */
+  | "liquid/lfm-3b"
+  /** DeepSeek: R1 Distill Llama 70B (free) */
+  | "deepseek/deepseek-r1-distill-llama-70b:free"
+  /** DeepSeek: R1 Distill Llama 70B */
+  | "deepseek/deepseek-r1-distill-llama-70b"
+  /** Google: Gemini 2.0 Flash Thinking Experimental 01-21 (free) */
+  | "google/gemini-2.0-flash-thinking-exp:free"
+  /** DeepSeek: R1 (free) */
+  | "deepseek/deepseek-r1:free"
+  /** DeepSeek: R1 */
   | "deepseek/deepseek-r1"
   /** Rogue Rose 103B v0.2 (free) */
   | "sophosympatheia/rogue-rose-103b-v0.2:free"
@@ -13,7 +87,9 @@ export type RouterModel =
   | "microsoft/phi-4"
   /** Sao10K: Llama 3.1 70B Hanami x1 */
   | "sao10k/l3.1-70b-hanami-x1"
-  /** DeepSeek V3 */
+  /** DeepSeek: DeepSeek V3 (free) */
+  | "deepseek/deepseek-chat:free"
+  /** DeepSeek: DeepSeek V3 */
   | "deepseek/deepseek-chat"
   /** Qwen: QvQ 72B Preview */
   | "qwen/qvq-72b-preview"
@@ -23,7 +99,7 @@ export type RouterModel =
   | "sao10k/l3.3-euryale-70b"
   /** OpenAI: o1 */
   | "openai/o1"
-  /** EVA Llama 3.33 70b */
+  /** EVA Llama 3.33 70B */
   | "eva-unit-01/eva-llama-3.33-70b"
   /** xAI: Grok 2 Vision 1212 */
   | "x-ai/grok-2-vision-1212"
@@ -35,6 +111,8 @@ export type RouterModel =
   | "google/gemini-2.0-flash-exp:free"
   /** Google: Gemini Experimental 1206 (free) */
   | "google/gemini-exp-1206:free"
+  /** Meta: Llama 3.3 70B Instruct (free) */
+  | "meta-llama/llama-3.3-70b-instruct:free"
   /** Meta: Llama 3.3 70B Instruct */
   | "meta-llama/llama-3.3-70b-instruct"
   /** Amazon: Nova Lite 1.0 */
@@ -45,8 +123,6 @@ export type RouterModel =
   | "amazon/nova-pro-v1"
   /** Qwen: QwQ 32B Preview */
   | "qwen/qwq-32b-preview"
-  /** Google: Gemini Experimental 1121 (free) */
-  | "google/gemini-exp-1121:free"
   /** Google: LearnLM 1.5 Pro Experimental (free) */
   | "google/learnlm-1.5-pro-experimental:free"
   /** EVA Qwen2.5 72B */
@@ -61,8 +137,6 @@ export type RouterModel =
   | "mistralai/pixtral-large-2411"
   /** xAI: Grok Vision Beta */
   | "x-ai/grok-vision-beta"
-  /** Google: Gemini Experimental 1114 (free) */
-  | "google/gemini-exp-1114:free"
   /** Infermatic: Mistral Nemo Inferor 12B */
   | "infermatic/mn-inferor-12b"
   /** Qwen2.5 Coder 32B Instruct */
@@ -71,7 +145,7 @@ export type RouterModel =
   | "raifle/sorcererlm-8x22b"
   /** EVA Qwen2.5 32B */
   | "eva-unit-01/eva-qwen-2.5-32b"
-  /** Unslopnemo 12b */
+  /** Unslopnemo 12B */
   | "thedrummer/unslopnemo-12b"
   /** Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated) */
   | "anthropic/claude-3.5-haiku-20241022:beta"
@@ -97,6 +171,8 @@ export type RouterModel =
   | "mistralai/ministral-3b"
   /** Qwen2.5 7B Instruct */
   | "qwen/qwen-2.5-7b-instruct"
+  /** NVIDIA: Llama 3.1 Nemotron 70B Instruct (free) */
+  | "nvidia/llama-3.1-nemotron-70b-instruct:free"
   /** NVIDIA: Llama 3.1 Nemotron 70B Instruct */
   | "nvidia/llama-3.1-nemotron-70b-instruct"
   /** Inflection: Inflection 3 Pi */
@@ -111,16 +187,12 @@ export type RouterModel =
   | "liquid/lfm-40b"
   /** Rocinante 12B */
   | "thedrummer/rocinante-12b"
-  /** Meta: Llama 3.2 3B Instruct (free) */
-  | "meta-llama/llama-3.2-3b-instruct:free"
   /** Meta: Llama 3.2 3B Instruct */
   | "meta-llama/llama-3.2-3b-instruct"
   /** Meta: Llama 3.2 1B Instruct (free) */
   | "meta-llama/llama-3.2-1b-instruct:free"
   /** Meta: Llama 3.2 1B Instruct */
   | "meta-llama/llama-3.2-1b-instruct"
-  /** Meta: Llama 3.2 90B Vision Instruct (free) */
-  | "meta-llama/llama-3.2-90b-vision-instruct:free"
   /** Meta: Llama 3.2 90B Vision Instruct */
   | "meta-llama/llama-3.2-90b-vision-instruct"
   /** Meta: Llama 3.2 11B Vision Instruct (free) */
@@ -149,8 +221,6 @@ export type RouterModel =
   | "cohere/command-r-plus-08-2024"
   /** Qwen2-VL 7B Instruct */
   | "qwen/qwen-2-vl-7b-instruct"
-  /** Google: Gemini Flash 1.5 Experimental */
-  | "google/gemini-flash-1.5-exp"
   /** Sao10K: Llama 3.1 Euryale 70B v2.2 */
   | "sao10k/l3.1-euryale-70b"
   /** Google: Gemini Flash 1.5 8B Experimental */
@@ -181,30 +251,22 @@ export type RouterModel =
   | "nothingiisreal/mn-celeste-12b"
   /** Perplexity: Llama 3.1 Sonar 8B */
   | "perplexity/llama-3.1-sonar-small-128k-chat"
-  /** Google: Gemini Pro 1.5 Experimental */
-  | "google/gemini-pro-1.5-exp"
   /** Perplexity: Llama 3.1 Sonar 70B */
   | "perplexity/llama-3.1-sonar-large-128k-chat"
   /** Perplexity: Llama 3.1 Sonar 70B Online */
   | "perplexity/llama-3.1-sonar-large-128k-online"
   /** Perplexity: Llama 3.1 Sonar 8B Online */
   | "perplexity/llama-3.1-sonar-small-128k-online"
-  /** Meta: Llama 3.1 405B Instruct (free) */
-  | "meta-llama/llama-3.1-405b-instruct:free"
   /** Meta: Llama 3.1 405B Instruct */
   | "meta-llama/llama-3.1-405b-instruct"
-  /** Meta: Llama 3.1 405B Instruct (nitro) */
-  | "meta-llama/llama-3.1-405b-instruct:nitro"
   /** Meta: Llama 3.1 8B Instruct (free) */
   | "meta-llama/llama-3.1-8b-instruct:free"
   /** Meta: Llama 3.1 8B Instruct */
   | "meta-llama/llama-3.1-8b-instruct"
-  /** Meta: Llama 3.1 70B Instruct (free) */
-  | "meta-llama/llama-3.1-70b-instruct:free"
   /** Meta: Llama 3.1 70B Instruct */
   | "meta-llama/llama-3.1-70b-instruct"
-  /** Meta: Llama 3.1 70B Instruct (nitro) */
-  | "meta-llama/llama-3.1-70b-instruct:nitro"
+  /** Mistral: Mistral Nemo (free) */
+  | "mistralai/mistral-nemo:free"
   /** Mistral: Mistral Nemo */
   | "mistralai/mistral-nemo"
   /** Mistral: Codestral Mamba */
@@ -213,10 +275,6 @@ export type RouterModel =
   | "openai/gpt-4o-mini"
   /** OpenAI: GPT-4o-mini (2024-07-18) */
   | "openai/gpt-4o-mini-2024-07-18"
-  /** Qwen 2 7B Instruct (free) */
-  | "qwen/qwen-2-7b-instruct:free"
-  /** Qwen 2 7B Instruct */
-  | "qwen/qwen-2-7b-instruct"
   /** Google: Gemma 2 27B */
   | "google/gemma-2-27b-it"
   /** Magnum 72B */
@@ -243,8 +301,6 @@ export type RouterModel =
   | "mistralai/mistral-7b-instruct:free"
   /** Mistral: Mistral 7B Instruct */
   | "mistralai/mistral-7b-instruct"
-  /** Mistral: Mistral 7B Instruct (nitro) */
-  | "mistralai/mistral-7b-instruct:nitro"
   /** Mistral: Mistral 7B Instruct v0.3 */
   | "mistralai/mistral-7b-instruct-v0.3"
   /** NousResearch: Hermes 2 Pro - Llama-3 8B */
@@ -261,14 +317,8 @@ export type RouterModel =
   | "neversleep/llama-3-lumimaid-70b"
   /** Google: Gemini Flash 1.5 */
   | "google/gemini-flash-1.5"
-  /** Perplexity: Llama3 Sonar 70B */
-  | "perplexity/llama-3-sonar-large-32k-chat"
-  /** Perplexity: Llama3 Sonar 70B Online */
-  | "perplexity/llama-3-sonar-large-32k-online"
   /** DeepSeek V2.5 */
   | "deepseek/deepseek-chat-v2.5"
-  /** Perplexity: Llama3 Sonar 8B */
-  | "perplexity/llama-3-sonar-small-32k-chat"
   /** OpenAI: GPT-4o (2024-05-13) */
   | "openai/gpt-4o-2024-05-13"
   /** Meta: LlamaGuard 2 8B */
@@ -281,18 +331,14 @@ export type RouterModel =
   | "neversleep/llama-3-lumimaid-8b:extended"
   /** NeverSleep: Llama 3 Lumimaid 8B */
   | "neversleep/llama-3-lumimaid-8b"
+  /** Fimbulvetr 11B v2 */
+  | "sao10k/fimbulvetr-11b-v2"
   /** Meta: Llama 3 8B Instruct (free) */
   | "meta-llama/llama-3-8b-instruct:free"
   /** Meta: Llama 3 8B Instruct */
   | "meta-llama/llama-3-8b-instruct"
-  /** Meta: Llama 3 8B Instruct (extended) */
-  | "meta-llama/llama-3-8b-instruct:extended"
-  /** Meta: Llama 3 8B Instruct (nitro) */
-  | "meta-llama/llama-3-8b-instruct:nitro"
   /** Meta: Llama 3 70B Instruct */
   | "meta-llama/llama-3-70b-instruct"
-  /** Meta: Llama 3 70B Instruct (nitro) */
-  | "meta-llama/llama-3-70b-instruct:nitro"
   /** Mistral: Mixtral 8x22B Instruct */
   | "mistralai/mixtral-8x22b-instruct"
   /** WizardLM-2 8x22B */
@@ -331,6 +377,8 @@ export type RouterModel =
   | "cohere/command-r-03-2024"
   /** Mistral Large */
   | "mistralai/mistral-large"
+  /** Google: Gemma 7B */
+  | "google/gemma-7b-it"
   /** OpenAI: GPT-3.5 Turbo (older v0613) */
   | "openai/gpt-3.5-turbo-0613"
   /** OpenAI: GPT-4 Turbo Preview */
@@ -343,8 +391,6 @@ export type RouterModel =
   | "mistralai/mistral-tiny"
   /** Mistral Medium */
   | "mistralai/mistral-medium"
-  /** Mistral: Mistral 7B Instruct v0.2 */
-  | "mistralai/mistral-7b-instruct-v0.2"
   /** Dolphin 2.6 Mixtral 8x7B 🐬 */
   | "cognitivecomputations/dolphin-mixtral-8x7b"
   /** Google: Gemini Pro Vision 1.0 */
@@ -355,8 +401,6 @@ export type RouterModel =
   | "mistralai/mixtral-8x7b"
   /** Mistral: Mixtral 8x7B Instruct */
   | "mistralai/mixtral-8x7b-instruct"
-  /** Mistral: Mixtral 8x7B Instruct (nitro) */
-  | "mistralai/mixtral-8x7b-instruct:nitro"
   /** OpenChat 3.5 7B (free) */
   | "openchat/openchat-7b:free"
   /** OpenChat 3.5 7B */
@@ -375,8 +419,6 @@ export type RouterModel =
   | "teknium/openhermes-2.5-mistral-7b"
   /** Toppy M 7B (free) */
   | "undi95/toppy-m-7b:free"
-  /** Toppy M 7B (nitro) */
-  | "undi95/toppy-m-7b:nitro"
   /** Toppy M 7B */
   | "undi95/toppy-m-7b"
   /** Goliath 120B */
@@ -419,8 +461,6 @@ export type RouterModel =
   | "anthropic/claude-2.0"
   /** ReMM SLERP 13B */
   | "undi95/remm-slerp-l2-13b"
-  /** ReMM SLERP 13B (extended) */
-  | "undi95/remm-slerp-l2-13b:extended"
   /** Google: PaLM 2 Chat */
   | "google/palm-2-chat-bison"
   /** Google: PaLM 2 Code Chat */
@@ -429,10 +469,6 @@ export type RouterModel =
   | "gryphe/mythomax-l2-13b:free"
   /** MythoMax 13B */
   | "gryphe/mythomax-l2-13b"
-  /** MythoMax 13B (nitro) */
-  | "gryphe/mythomax-l2-13b:nitro"
-  /** MythoMax 13B (extended) */
-  | "gryphe/mythomax-l2-13b:extended"
   /** Meta: Llama 2 13B Chat */
   | "meta-llama/llama-2-13b-chat"
   /** Meta: Llama 2 70B Chat */

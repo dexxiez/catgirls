@@ -1,6 +1,6 @@
 {
   "name": "@catgirls/openrouter",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.1",
   "description": "Nyaa~! A TypeScript client for OpenRouter that's both kawaii and powerful! 😻",
   "author": "Dezziez",
   "license": "MIT",
@@ -26,9 +26,9 @@
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "29.7.0",
-    "ts-jest": "^29.2.5",
+    "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
-    "tsx": "4.19.2"
+    "tsx": "4.19.3"
   },
   "repository": {
     "type": "git",

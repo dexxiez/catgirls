@@ -1,10 +1,42 @@
 // ! Generated file, do not modify by hand. See packages/openrouter/scripts/generate-models.ts
 
 export type RouterModel =
+  /** Google: Gemini 2.5 Pro Preview */
+  | "google/gemini-2.5-pro-preview-03-25"
+  /** THUDM: GLM Z1 32B (free) */
+  | "thudm/glm-z1-32b:free"
+  /** THUDM: GLM 4 32B (free) */
+  | "thudm/glm-4-32b:free"
+  /** Google: Gemini 2.5 Flash Preview */
+  | "google/gemini-2.5-flash-preview"
+  /** Google: Gemini 2.5 Flash Preview (thinking) */
+  | "google/gemini-2.5-flash-preview:thinking"
+  /** OpenAI: o4 Mini High */
+  | "openai/o4-mini-high"
+  /** OpenAI: o3 */
+  | "openai/o3"
+  /** OpenAI: o4 Mini */
+  | "openai/o4-mini"
+  /** Shisa AI: Shisa V2 Llama 3.3 70B  (free) */
+  | "shisa-ai/shisa-v2-llama3.3-70b:free"
+  /** Qwen: Qwen2.5 Coder 7B Instruct */
+  | "qwen/qwen2.5-coder-7b-instruct"
+  /** OpenAI: GPT-4.1 */
+  | "openai/gpt-4.1"
+  /** OpenAI: GPT-4.1 Mini */
+  | "openai/gpt-4.1-mini"
+  /** OpenAI: GPT-4.1 Nano */
+  | "openai/gpt-4.1-nano"
+  /** EleutherAI: Llemma 7b */
+  | "eleutherai/llemma_7b"
+  /** AlfredPros: CodeLLaMa 7B Instruct Solidity */
+  | "alfredpros/codellama-7b-instruct-solidity"
+  /** ArliAI: QwQ 32B RpR v1 (free) */
+  | "arliai/qwq-32b-arliai-rpr-v1:free"
+  /** Agentica: Deepcoder 14B Preview (free) */
+  | "agentica-org/deepcoder-14b-preview:free"
   /** Moonshot AI: Kimi VL A3B Thinking (free) */
   | "moonshotai/kimi-vl-a3b-thinking:free"
-  /** Optimus Alpha */
-  | "openrouter/optimus-alpha"
   /** xAI: Grok 3 Mini Beta */
   | "x-ai/grok-3-mini-beta"
   /** xAI: Grok 3 Beta */
@@ -15,8 +47,6 @@ export type RouterModel =
   | "nvidia/llama-3.3-nemotron-super-49b-v1:free"
   /** NVIDIA: Llama 3.1 Nemotron Ultra 253B v1 (free) */
   | "nvidia/llama-3.1-nemotron-ultra-253b-v1:free"
-  /** Swallow: Llama 3.1 Swallow 8B Instruct V0.3 */
-  | "tokyotech-llm/llama-3.1-swallow-8b-instruct-v0.3"
   /** Meta: Llama 4 Maverick (free) */
   | "meta-llama/llama-4-maverick:free"
   /** Meta: Llama 4 Maverick */
@@ -25,10 +55,6 @@ export type RouterModel =
   | "meta-llama/llama-4-scout:free"
   /** Meta: Llama 4 Scout */
   | "meta-llama/llama-4-scout"
-  /** Google: Gemini 2.5 Pro Preview */
-  | "google/gemini-2.5-pro-preview-03-25"
-  /** Quasar Alpha */
-  | "openrouter/quasar-alpha"
   /** OpenHands LM 32B V0.1 */
   | "all-hands/openhands-lm-32b-v0.1"
   /** Mistral: Ministral 8B */
@@ -69,8 +95,6 @@ export type RouterModel =
   | "open-r1/olympiccoder-32b:free"
   /** SteelSkull: L3.3 Electra R1 70B */
   | "steelskull/l3.3-electra-r1-70b"
-  /** AllenAI: Olmo 2 32B Instruct */
-  | "allenai/olmo-2-0325-32b-instruct"
   /** Google: Gemma 3 1B (free) */
   | "google/gemma-3-1b-it:free"
   /** Google: Gemma 3 4B (free) */
@@ -91,8 +115,6 @@ export type RouterModel =
   | "openai/gpt-4o-mini-search-preview"
   /** OpenAI: GPT-4o Search Preview */
   | "openai/gpt-4o-search-preview"
-  /** Swallow: Llama 3.1 Swallow 70B Instruct V0.3 */
-  | "tokyotech-llm/llama-3.1-swallow-70b-instruct-v0.3"
   /** Reka: Flash 3 (free) */
   | "rekaai/reka-flash-3:free"
   /** Google: Gemma 3 27B (free) */
@@ -119,8 +141,6 @@ export type RouterModel =
   | "qwen/qwq-32b:free"
   /** Qwen: QwQ 32B */
   | "qwen/qwq-32b"
-  /** Qwen: Qwen2.5 32B Instruct */
-  | "qwen/qwen2.5-32b-instruct"
   /** Moonshot AI: Moonlight 16B A3B Instruct (free) */
   | "moonshotai/moonlight-16b-a3b-instruct:free"
   /** Nous: DeepHermes 3 Llama 3 8B Preview (free) */
@@ -213,8 +233,6 @@ export type RouterModel =
   | "mistralai/codestral-2501"
   /** Microsoft: Phi 4 */
   | "microsoft/phi-4"
-  /** Sao10K: Llama 3.1 70B Hanami x1 */
-  | "sao10k/l3.1-70b-hanami-x1"
   /** DeepSeek: DeepSeek V3 (free) */
   | "deepseek/deepseek-chat:free"
   /** DeepSeek: DeepSeek V3 */
@@ -379,6 +397,8 @@ export type RouterModel =
   | "aetherwiing/mn-starcannon-12b"
   /** OpenAI: GPT-4o (2024-08-06) */
   | "openai/gpt-4o-2024-08-06"
+  /** Meta: Llama 3.1 405B (base) (free) */
+  | "meta-llama/llama-3.1-405b:free"
   /** Meta: Llama 3.1 405B (base) */
   | "meta-llama/llama-3.1-405b"
   /** Mistral Nemo 12B Celeste */
@@ -547,8 +567,6 @@ export type RouterModel =
   | "google/palm-2-codechat-bison-32k"
   /** Airoboros 70B */
   | "jondurbin/airoboros-l2-70b"
-  /** Xwin 70B */
-  | "xwin-lm/xwin-lm-70b"
   /** OpenAI: GPT-3.5 Turbo Instruct */
   | "openai/gpt-3.5-turbo-instruct"
   /** Mistral: Mistral 7B Instruct v0.1 */

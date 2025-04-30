@@ -143,7 +143,7 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
         for (const toolCall of assistantMessage.tool_calls) {
           if (toolCall.type === "function") {
             const { name, arguments: args } = toolCall.function;
-            const parsedArgs = JSON.parse(args);
+            const parsedArgs = args && args.trim() ? JSON.parse(args) : {};
 
             // Find the tool
             const tool = this.options.tools.find((t) => t.name === name);
@@ -176,9 +176,19 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
                   content: JSON.stringify({ error: String(error) }),
                 });
 
+                // Safely parse args or use empty object if parsing fails
+                let safeArgs = {};
+                try {
+                  if (args && args.trim()) {
+                    safeArgs = JSON.parse(args);
+                  }
+                } catch {
+                  // If JSON parsing fails, keep empty object
+                }
+
                 this.emit("tool_error", {
                   tool: name,
-                  args: parsedArgs,
+                  args: safeArgs,
                   error,
                 });
               }
@@ -207,6 +217,8 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
 
     let iterations = 0;
     let isDone = false;
+    // Track processed tool calls to avoid duplicates
+    const processedToolCallIds = new Set<string>();
 
     const processIteration = async () => {
       if (iterations >= this.options.maxIterations || isDone) {
@@ -296,6 +308,7 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
         // Handle tool calls from streaming
         stream.on("tool_calls", (toolCalls: any) => {
           currentToolCalls = currentToolCalls.concat(toolCalls);
+          // Emit the stream_tool_calls event for UI updates
           eventEmitter.emit("stream_tool_calls", toolCalls);
         });
 
@@ -356,14 +369,19 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
                   function: { name, arguments: args },
                 } = toolCall;
 
+                // Skip if we've already processed this tool call
+                if (processedToolCallIds.has(id)) continue;
+                processedToolCallIds.add(id);
+
                 try {
-                  const parsedArgs = JSON.parse(args);
+                  const parsedArgs =
+                    args && args.trim() ? JSON.parse(args) : {};
 
                   // Find the tool
                   const tool = this.options.tools.find((t) => t.name === name);
 
                   if (tool) {
-                    // Emit tool call event
+                    // Emit tool_call event for each executed tool
                     eventEmitter.emit("tool_call", { name, args: parsedArgs });
 
                     // Act: Execute the tool
@@ -390,9 +408,19 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
                     content: JSON.stringify({ error: String(error) }),
                   });
 
+                  // Safely parse args or use empty object if parsing fails
+                  let safeArgs = {};
+                  try {
+                    if (args && args.trim()) {
+                      safeArgs = JSON.parse(args);
+                    }
+                  } catch {
+                    // If JSON parsing fails, keep empty object
+                  }
+
                   eventEmitter.emit("tool_error", {
                     tool: name,
-                    args: JSON.parse(args),
+                    args: safeArgs,
                     error,
                   });
                 }

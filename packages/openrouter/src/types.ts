@@ -18,6 +18,7 @@ export interface QueryResponseModel {
   description: string;
   pricing: ModelPricing;
   context_length: number;
+  supported_parameters: string[];
   architecture: ModelArchitecture;
   top_provider: TopProvider;
   per_request_limits: PerRequestLimits;
@@ -293,47 +294,63 @@ type ToolChoice =
     };
 
 export type ProviderName =
-  | "OpenAI"
-  | "Anthropic"
-  | "Google"
-  | "Google AI Studio"
-  | "Amazon Bedrock"
-  | "Groq"
-  | "SambaNova"
-  | "Cohere"
-  | "Mistral"
-  | "Together"
-  | "Together 2"
-  | "Fireworks"
-  | "DeepInfra"
-  | "Lepton"
-  | "Novita"
-  | "Avian"
-  | "Lambda"
-  | "Azure"
-  | "Modal"
-  | "AnyScale"
-  | "Replicate"
-  | "Perplexity"
-  | "Recursal"
-  | "OctoAI"
-  | "DeepSeek"
-  | "Infermatic"
   | "AI21"
-  | "Featherless"
-  | "Inflection"
-  | "xAI"
+  | "AionLabs"
+  | "Alibaba"
+  | "Amazon Bedrock"
+  | "Anthropic"
+  | "Atoma"
+  | "Avian.io"
+  | "Azure"
+  | "CentML"
+  | "Chutes"
   | "Cloudflare"
-  | "SF Compute"
-  | "01.AI"
-  | "HuggingFace"
-  | "Mancer"
-  | "Mancer 2"
+  | "Cohere"
+  | "Crusoe"
+  | "DeepInfra"
+  | "DeepSeek"
+  | "Enfer"
+  | "Featherless"
+  | "Fireworks"
+  | "Friendli"
+  | "GMICloud"
+  | "Google AI Studio"
+  | "Google Vertex"
+  | "Groq"
   | "Hyperbolic"
-  | "Hyperbolic 2"
-  | "Lynn 2"
-  | "Lynn"
-  | "Reflection";
+  | "Hyperbolic (quantized)"
+  | "Inception"
+  | "inference.net"
+  | "Infermatic"
+  | "Inflection"
+  | "InoCloud"
+  | "kluster.ai"
+  | "Lambda"
+  | "Lepton"
+  | "Liquid"
+  | "Mancer"
+  | "Mancer (private)"
+  | "Minimax"
+  | "Mistral"
+  | "nCompass"
+  | "Nebius AI Studio"
+  | "NextBit"
+  | "Nineteen"
+  | "NovitaAI"
+  | "OpenAI"
+  | "OpenInference"
+  | "Parasail"
+  | "Perplexity"
+  | "Phala"
+  | "Reflection"
+  | "SambaNova"
+  | "Stealth"
+  | "Targon"
+  | "Together"
+  | "Together (lite)"
+  | "Ubicloud"
+  | "Venice"
+  | "xAI";
 
 export type DataCollectionSetting = "deny" | "allow";
 
@@ -391,7 +408,6 @@ type BaseRequest = {
   model?: string;
   stream?: boolean;
   temperature?: number;
-  // ... other common fields
 };
 
 // Discriminated union for the request
@@ -520,3 +536,172 @@ export type GenerationStats = {
   origin: string;
   usage: number;
 };
+
+/**
+ * Configuration options for the Agent
+ */
+export interface AgentOptions {
+  /**
+   * Maximum number of iterations the agent will perform before giving up
+   * @default 5
+   */
+  maxIterations?: number;
+
+  /**
+   * The model to use for the agent
+   * If not provided, falls back to the client's default model
+   */
+  model?: RouterModel;
+
+  /**
+   * System prompt to instruct the agent
+   * If not provided, a default prompt will be generated based on markers
+   */
+  systemPrompt?: string;
+
+  /**
+   * Tools the agent can use to perform tasks
+   * @default []
+   */
+  tools?: AgentTool[];
+
+  /**
+   * Whether to emit verbose debugging events
+   * @default false
+   */
+  verbose?: boolean;
+
+  /**
+   * Markers for different parts of the agent's thought process
+   * Used for UI rendering and response formatting
+   */
+  markers?: AgentMarkers;
+
+  /**
+   * Custom function to determine when the agent should stop iterations
+   * By default, stops when the finalAnswer marker is found
+   */
+  stopCondition?: (messages: Message[]) => boolean;
+}
+
+/**
+ * UI markers for different parts of the agent's thought process
+ */
+export interface AgentMarkers {
+  /**
+   * Marker for the agent's thinking/reasoning process
+   * @default "<thinking>"
+   */
+  thinking?: string;
+
+  /**
+   * Marker for when the agent decides to take an action (usually using a tool)
+   * @default "<action>"
+   */
+  action?: string;
+
+  /**
+   * Marker for observations after receiving tool results
+   * @default "<observation>"
+   */
+  observation?: string;
+
+  /**
+   * Marker for the final answer/conclusion
+   * @default "<answer>"
+   */
+  finalAnswer?: string;
+}
+
+/**
+ * Tool definition for agent functions
+ */
+export interface AgentTool {
+  /**
+   * Name of the tool - used by the LLM to invoke it
+   */
+  name: string;
+
+  /**
+   * Description of what the tool does
+   * This helps the LLM understand when to use the tool
+   */
+  description: string;
+
+  /**
+   * JSON Schema defining the parameters for the tool
+   * Should be an object type with properties
+   */
+  parameters: object;
+
+  /**
+   * Function that executes the tool's functionality
+   * Returns a promise that resolves to the tool's result
+   */
+  execute: (params: any) => Promise<any>;
+}
+
+/**
+ * Events emitted by the Agent during execution
+ */
+export interface AgentEvents {
+  /**
+   * Emitted for each token when streaming
+   */
+  token: (token: string) => void;
+
+  /**
+   * Emitted when a marker (thinking/action/observation/answer) is found
+   */
+  marker: (data: { type: string; content: string }) => void;
+
+  /**
+   * Emitted when the agent calls a tool
+   */
+  tool_call: (data: { name: string; args: any }) => void;
+
+  /**
+   * Emitted when a tool returns a result
+   */
+  tool_result: (data: { tool: string; args: any; result: any }) => void;
+
+  /**
+   * Emitted when a tool throws an error
+   */
+  tool_error: (data: { tool: string; args: any; error: any }) => void;
+
+  /**
+   * Emitted at the start of each iteration when verbose is true
+   */
+  iteration: (data: { iteration: number; messages: Message[] }) => void;
+
+  /**
+   * Emitted when the agent gets a response from the LLM
+   */
+  response: (message: Message) => void;
+
+  /**
+   * Emitted when the agent extracts a final answer
+   */
+  final_answer: (answer: string) => void;
+
+  /**
+   * Emitted when the agent completes execution
+   */
+  complete: () => void;
+
+  /**
+   * Emitted when an error occurs
+   */
+  error: (error: Error) => void;
+}
+
+/**
+ * Return type for non-streaming agent execution
+ */
+export type AgentResult = string;
+
+/**
+ * Return type for streaming agent execution
+ */
+export type AgentStreamResult = EventEmitter;

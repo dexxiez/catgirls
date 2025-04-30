@@ -11,6 +11,7 @@ A fully typed, streaming-capable OpenRouter API client that makes working with A
 - Built-in error handling with pretty messages 💝
 - Automatic retries and fallbacks across providers 🔄
 - Provider preferences and routing control 🛣️
+- Chain-of-thought Agent for complex reasoning tasks 🧠✨
 
 ## Installation
 
@@ -31,7 +32,7 @@ import { OpenRouterClient } from "@catgirls/openrouter";
 const client = new OpenRouterClient("your-api-key", {
   siteName: "My Kawaii App", // Optional
   siteUrl: "https://nyaa.example.com", // Optional
-  model: "anthropic/claude-3-opus", // Default model or choose later!
+  model: "anthropic/claude-3.7-sonnet", // Default model or choose later!
 });
 
 // Simple completion
@@ -134,6 +135,85 @@ const response = await client.chatCompletion({
 });
 ```
 
+## Smart Agent Mode (=ↀωↀ=)✧
+
+_perks up ears and wiggles whiskers_
+
+Use the Agent class for advanced reasoning, step-by-step thinking, and tool use:
+
+```typescript
+import { OpenRouterClient, Agent } from "@catgirls/openrouter";
+
+// Create your client first
+const client = new OpenRouterClient("your-api-key");
+
+// Create an agent with tools
+const agent = new Agent(client, {
+  model: "anthropic/claude-3.5-sonnet", // Optional override
+  maxIterations: 5, // Max thinking steps
+  tools: [
+    {
+      name: "fetchWeather",
+      description: "Get the current weather for a location",
+      parameters: {
+        type: "object",
+        properties: {
+          location: { type: "string", description: "City or location name" },
+        },
+        required: ["location"],
+      },
+      execute: async ({ location }) => {
+        // Simulate weather API
+        return { temperature: "22°C", condition: "Sunny", location };
+      },
+    },
+  ],
+});
+
+// Non-streaming execution (patiently waiting... *tail swish*)
+const answer = await agent.run(
+  "What's the weather in Tokyo and should I bring an umbrella?",
+);
+console.log(`Final answer: ${answer}`);
+
+// Streaming execution with all the kawaii events! (/^◕ᴥ◕^\\)
+const stream = await agent.runStream("Plan my trip to Japan next week");
+
+// Listen for thinking/reasoning steps
+stream.on("marker", ({ type, content }) => {
+  if (type === "thinking") console.log(`😺 Thinking: ${content}`);
+  if (type === "action") console.log(`🐾 Action: ${content}`);
+  if (type === "observation") console.log(`👀 Observed: ${content}`);
+});
+
+// Tool usage events
+stream.on("tool_call", ({ name, args }) =>
+  console.log(`Using tool: ${name}`, args),
+);
+stream.on("tool_result", ({ result }) => console.log(`Tool result:`, result));
+
+// Final answer when kitty is done thinking
+stream.on("final_answer", (answer) =>
+  console.log(`Meowvelous answer: ${answer}`),
+);
+```
+
+The Agent provides structured thinking with special markers:
+
+```typescript
+// Customize your thinking markers
+const agent = new Agent(client, {
+  markers: {
+    thinking: "<thinking>", // For reasoning steps
+    action: "<action>", // For tool usage decisions
+    observation: "<observation>", // For processing tool results
+    finalAnswer: "<answer>", // For the final conclusion
+  },
+  // Custom system prompt to guide the Agent's behavior
+  systemPrompt: "You are a helpful cat assistant who loves solving problems...",
+});
+```
+
 ## API Reference
 
 ### OpenRouterClient
@@ -159,6 +239,31 @@ class OpenRouterClient {
   async getGenerationStats(generationId: string): Promise<GenerationStats>;
 
   async getModels(): Promise<QueryResponseModel[]>;
+}
+```
+
+### Agent
+
+```typescript
+class Agent extends EventEmitter {
+  constructor(
+    client: OpenRouterClient,
+    options?: {
+      maxIterations?: number; // Default: 5
+      model?: RouterModel; // Default: anthropic/claude-3-sonnet
+      systemPrompt?: string; // Custom system instructions
+      tools?: AgentTool[]; // Tools the agent can use
+      verbose?: boolean; // Enable detailed logging
+      markers?: AgentMarkers; // Custom thinking markers
+      stopCondition?: (messages: Message[]) => boolean; // Custom stop logic
+    },
+  );
+
+  // Execute agent with synchronous response
+  async run(query: string): Promise<string>;
+
+  // Execute agent with streaming events
+  async runStream(query: string): Promise<EventEmitter>;
 }
 ```
 

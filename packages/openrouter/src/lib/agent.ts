@@ -26,8 +26,7 @@ export class Agent extends EventEmitter {
 
     this.options = {
       maxIterations: options.maxIterations ?? 5,
-      model:
-        options.model ?? ("anthropic/claude-3-sonnet-20240229" as RouterModel),
+      model: options.model ?? ("anthropic/claude-3.7-sonnet" as RouterModel),
       systemPrompt:
         options.systemPrompt ??
         this.getDefaultSystemPrompt(options.markers ?? defaultMarkers),

@@ -37,7 +37,9 @@ export class OpenRouterClient {
       siteUrl?: string;
       siteName?: string;
       model?: RouterModel;
-    } = {},
+    } = {
+      model: "anthropic/claude-3.7-sonnet",
+    },
     httpClient?: IHttpClient,
     streamHandler?: IStreamHandler,
   ) {

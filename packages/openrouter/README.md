@@ -204,13 +204,19 @@ The Agent provides structured thinking with special markers:
 // Customize your thinking markers
 const agent = new Agent(client, {
   markers: {
+    // Simple format with same opening/closing tags
     thinking: "<thinking>", // For reasoning steps
-    action: "<action>", // For tool usage decisions
-    observation: "<observation>", // For processing tool results
-    finalAnswer: "<answer>", // For the final conclusion
+
+    // Or advanced format with distinct tags
+    action: { open: "<action>", close: "</action>" }, // For tool usage decisions
+    observation: { open: "<observation>", close: "</observation>" }, // For processing tool results
+    finalAnswer: { open: "<answer>", close: "</answer>" }, // For the final conclusion
   },
   // Custom system prompt to guide the Agent's behavior
   systemPrompt: "You are a helpful cat assistant who loves solving problems...",
+
+  // Optionally prepend the default prompt containing marker instructions
+  prependDefaultPrompt: true,
 });
 ```
 
@@ -252,6 +258,7 @@ class Agent extends EventEmitter {
       maxIterations?: number; // Default: 5
       model?: RouterModel; // Default: anthropic/claude-3-sonnet
       systemPrompt?: string; // Custom system instructions
+      prependDefaultPrompt?: boolean; // Prepend default prompt with marker instructions
       tools?: AgentTool[]; // Tools the agent can use
       verbose?: boolean; // Enable detailed logging
       markers?: AgentMarkers; // Custom thinking markers

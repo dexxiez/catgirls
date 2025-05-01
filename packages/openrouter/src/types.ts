@@ -560,6 +560,12 @@ export interface AgentOptions {
   systemPrompt?: string;
 
   /**
+   * Whether to prepend the default system prompt to the user's system prompt
+   * @default false
+   */
+  prependDefaultPrompt?: boolean;
+
+  /**
    * Tools the agent can use to perform tasks
    * @default []
    */
@@ -589,28 +595,28 @@ export interface AgentOptions {
  */
 export interface AgentMarkers {
   /**
-   * Marker for the agent's thinking/reasoning process
-   * @default "<thinking>"
+   * Opening and closing markers for the agent's thinking/reasoning process
+   * @default "<thinking>" for both opening and closing
    */
-  thinking?: string;
+  thinking?: string | { open: string; close: string };
 
   /**
-   * Marker for when the agent decides to take an action (usually using a tool)
-   * @default "<action>"
+   * Opening and closing markers for when the agent decides to take an action (usually using a tool)
+   * @default "<action>" for both opening and closing
    */
-  action?: string;
+  action?: string | { open: string; close: string };
 
   /**
-   * Marker for observations after receiving tool results
-   * @default "<observation>"
+   * Opening and closing markers for observations after receiving tool results
+   * @default "<observation>" for both opening and closing
    */
-  observation?: string;
+  observation?: string | { open: string; close: string };
 
   /**
-   * Marker for the final answer/conclusion
-   * @default "<answer>"
+   * Opening and closing markers for the final answer/conclusion
+   * @default "<answer>" for both opening and closing
    */
-  finalAnswer?: string;
+  finalAnswer?: string | { open: string; close: string };
 }
 
 /**

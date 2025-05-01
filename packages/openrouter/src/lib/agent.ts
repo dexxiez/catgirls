@@ -3,6 +3,7 @@ import { EventEmitter } from "events";
 import { OpenRouterClient } from "./client";
 import { AgentMarkers, AgentOptions, Message } from "../types";
 import { RouterModel } from "../models";
+import { normalizeMarker } from "./utils";
 
 /**
  * Agent class for performing chain-of-thought reasoning with LLMs
@@ -11,6 +12,12 @@ export class Agent extends EventEmitter {
   private client: OpenRouterClient;
   private options: Required<AgentOptions>;
   private messages: Message[] = [];
+  private normalizedMarkers: {
+    thinking: { open: string; close: string } | null;
+    action: { open: string; close: string } | null;
+    observation: { open: string; close: string } | null;
+    finalAnswer: { open: string; close: string } | null;
+  };
 
   constructor(client: OpenRouterClient, options: AgentOptions = {}) {
     super();
@@ -24,15 +31,26 @@ export class Agent extends EventEmitter {
       finalAnswer: "<answer>",
     };
 
+    const markers = options.markers ?? defaultMarkers;
+
+    // Normalize markers for easier handling
+    this.normalizedMarkers = {
+      thinking: normalizeMarker(markers.thinking),
+      action: normalizeMarker(markers.action),
+      observation: normalizeMarker(markers.observation),
+      finalAnswer: normalizeMarker(markers.finalAnswer),
+    };
+
     this.options = {
       maxIterations: options.maxIterations ?? 5,
       model: options.model ?? ("anthropic/claude-3.7-sonnet" as RouterModel),
-      systemPrompt:
-        options.systemPrompt ??
-        this.getDefaultSystemPrompt(options.markers ?? defaultMarkers),
+      prependDefaultPrompt: options.prependDefaultPrompt ?? false,
+      systemPrompt: options.prependDefaultPrompt
+        ? this.getDefaultSystemPrompt(markers) + "\n\n" + options.systemPrompt
+        : (options.systemPrompt ?? this.getDefaultSystemPrompt(markers)),
       tools: options.tools ?? [],
       verbose: options.verbose ?? false,
-      markers: options.markers ?? defaultMarkers,
+      markers: markers,
       stopCondition:
         options.stopCondition ?? this.defaultStopCondition.bind(this),
     };
@@ -49,10 +67,14 @@ export class Agent extends EventEmitter {
    */
   private defaultStopCondition(messages: Message[]): boolean {
     const lastMessage = messages[messages.length - 1];
+    const finalAnswerMarker = this.normalizedMarkers.finalAnswer;
+
+    if (!finalAnswerMarker) return false;
+
     return (
       lastMessage.role === "assistant" &&
       typeof lastMessage.content === "string" &&
-      lastMessage.content.includes(this.options.markers.finalAnswer!)
+      lastMessage.content.includes(finalAnswerMarker.open)
     );
   }
 
@@ -60,21 +82,42 @@ export class Agent extends EventEmitter {
    * Gets the default system prompt with markers
    */
   private getDefaultSystemPrompt(markers: AgentMarkers): string {
+    const thinkingMarker = normalizeMarker(markers.thinking);
+    const actionMarker = normalizeMarker(markers.action);
+    const observationMarker = normalizeMarker(markers.observation);
+    const finalAnswerMarker = normalizeMarker(markers.finalAnswer);
+
     return `You are a helpful assistant that solves tasks step by step.
 
-When you're analyzing a problem or thinking about it, wrap your thoughts in ${markers.thinking} tags.
-Example: ${markers.thinking}I need to break this problem into parts: first calculate X, then Y${markers.thinking}
+${
+  thinkingMarker
+    ? `When you're analyzing a problem or thinking about it, wrap your thoughts in ${thinkingMarker.open} and ${thinkingMarker.close} tags.
+Example: ${thinkingMarker.open}I need to break this problem into parts: first calculate X, then Y${thinkingMarker.close}`
+    : ""
+}
 
-When you decide to use a tool, wrap your reasoning in ${markers.action} tags.
-Example: ${markers.action}I'll search for information about climate change${markers.action}
+${
+  actionMarker
+    ? `When you decide to use a tool, wrap your reasoning in ${actionMarker.open} and ${actionMarker.close} tags.
+Example: ${actionMarker.open}I'll search for information about climate change${actionMarker.close}`
+    : ""
+}
 
-After getting information, wrap your observations in ${markers.observation} tags.
-Example: ${markers.observation}The search revealed that global temperatures have risen by 1.1°C${markers.observation}
+${
+  observationMarker
+    ? `After getting information, wrap your observations in ${observationMarker.open} and ${observationMarker.close} tags.
+Example: ${observationMarker.open}The search revealed that global temperatures have risen by 1.1°C${observationMarker.close}`
+    : ""
+}
 
-When you have a final answer, wrap it in ${markers.finalAnswer} tags.
-Example: ${markers.finalAnswer}Based on my analysis, the answer is 42${markers.finalAnswer}
+${
+  finalAnswerMarker
+    ? `When you have a final answer, wrap it in ${finalAnswerMarker.open} and ${finalAnswerMarker.close} tags.
+Example: ${finalAnswerMarker.open}Based on my analysis, the answer is 42${finalAnswerMarker.close}`
+    : ""
+}
 
-Use ONLY these markers for structuring your responses. Only use ${markers.finalAnswer} when you're completely done with the task.`;
+Use ONLY these markers for structuring your responses. Only use ${finalAnswerMarker?.open} when you're completely done with the task.`;
   }
 
   /**
@@ -118,15 +161,20 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
         const lastMessage = this.messages[this.messages.length - 1];
         if (typeof lastMessage.content === "string") {
           // Extract the final answer from within the markers
-          const finalAnswerMarker = this.options.markers.finalAnswer!;
-          const regex = new RegExp(
-            `${finalAnswerMarker}(.*?)${finalAnswerMarker}`,
-            "s",
-          );
-          const match = lastMessage.content.match(regex);
+          const finalAnswerMarker = this.normalizedMarkers.finalAnswer;
 
-          finalAnswer = match ? match[1].trim() : lastMessage.content;
-          this.emit("final_answer", finalAnswer);
+          if (finalAnswerMarker) {
+            const regex = new RegExp(
+              `${this.escapeRegExp(finalAnswerMarker.open)}(.*?)${this.escapeRegExp(finalAnswerMarker.close)}`,
+              "s",
+            );
+            const match = lastMessage.content.match(regex);
+
+            finalAnswer = match ? match[1].trim() : lastMessage.content;
+            this.emit("final_answer", finalAnswer);
+          } else {
+            finalAnswer = lastMessage.content;
+          }
         } else {
           finalAnswer = "Received non-string content as final answer.";
         }
@@ -206,6 +254,13 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
   }
 
   /**
+   * Helper method to escape special regex characters
+   */
+  private escapeRegExp(string: string): string {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  }
+
+  /**
    * Run the agent on a query with streaming support
    */
   async runStream(query: string): Promise<EventEmitter> {
@@ -254,15 +309,18 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
           eventEmitter.emit("token", content);
 
           // Look for markers in the accumulated content
-          for (const [type, marker] of Object.entries(this.options.markers)) {
-            if (!marker) continue;
+          for (const [type, normalizedMarker] of Object.entries(
+            this.normalizedMarkers,
+          )) {
+            if (!normalizedMarker) continue;
+            const { open, close } = normalizedMarker;
 
             // Check for opening marker
-            if (accumulatedContent.includes(marker) && !lastMarkerType) {
-              const markerIndex = accumulatedContent.lastIndexOf(marker);
+            if (accumulatedContent.includes(open) && !lastMarkerType) {
+              const markerIndex = accumulatedContent.lastIndexOf(open);
               if (
                 markerIndex !== -1 &&
-                markerIndex + marker.length <= accumulatedContent.length
+                markerIndex + open.length <= accumulatedContent.length
               ) {
                 lastMarkerType = type;
                 markerContent = "";
@@ -276,18 +334,18 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
             }
 
             // Check for closing marker (only if we're in a marker section)
-            if (
-              lastMarkerType === type &&
-              accumulatedContent.includes(marker)
-            ) {
-              const markerStartIndex = accumulatedContent.indexOf(marker);
-              const markerEndIndex = accumulatedContent.lastIndexOf(marker);
+            if (lastMarkerType === type && accumulatedContent.includes(close)) {
+              const markerStartIndex = accumulatedContent.indexOf(open);
+              const markerEndIndex = accumulatedContent.lastIndexOf(close);
 
               // If we have both opening and closing markers
-              if (markerStartIndex !== markerEndIndex) {
+              if (
+                markerStartIndex !== -1 &&
+                markerEndIndex > markerStartIndex
+              ) {
                 // Extract the content between markers
                 markerContent = accumulatedContent.substring(
-                  markerStartIndex + marker.length,
+                  markerStartIndex + open.length,
                   markerEndIndex,
                 );
 
@@ -338,13 +396,13 @@ Use ONLY these markers for structuring your responses. Only use ${markers.finalA
             isDone = true;
 
             // Extract final answer if present
+            const finalAnswerMarker = this.normalizedMarkers.finalAnswer;
             if (
-              this.options.markers.finalAnswer &&
+              finalAnswerMarker &&
               typeof assistantMessage.content === "string"
             ) {
-              const finalAnswerMarker = this.options.markers.finalAnswer;
               const regex = new RegExp(
-                `${finalAnswerMarker}(.*?)${finalAnswerMarker}`,
+                `${this.escapeRegExp(finalAnswerMarker.open)}(.*?)${this.escapeRegExp(finalAnswerMarker.close)}`,
                 "s",
               );
               const match = assistantMessage.content.match(regex);

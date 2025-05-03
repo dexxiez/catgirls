@@ -580,12 +580,26 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
                 hasFinalAnswer = lastContent.includes(finalAnswerMarker.open);
               }
 
+              // Check if any tool calls were made during the conversation
+              const hasToolMessages = this.messages.some(
+                (msg) => msg.role === "tool",
+              );
+
               // If no final answer found after last iteration, emit a synthetic one
               if (!hasFinalAnswer && !isDone) {
-                eventEmitter.emit(
-                  "final_answer",
-                  "ANSWER_AFTER_TOOL_NOT_GIVEN",
-                );
+                if (hasToolMessages) {
+                  // Only emit this specific message if tools were actually used
+                  eventEmitter.emit(
+                    "final_answer",
+                    "ANSWER_AFTER_TOOL_NOT_GIVEN",
+                  );
+                } else {
+                  // Otherwise emit a more generic message
+                  eventEmitter.emit(
+                    "final_answer",
+                    "MAX_ITERATIONS_REACHED_WITHOUT_FINAL_ANSWER",
+                  );
+                }
               }
 
               isDone = true;

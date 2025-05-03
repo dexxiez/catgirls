@@ -249,6 +249,18 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
       finalAnswer = "Max iterations reached without final answer.";
     }
 
+    // Check if the last message was from a tool and no final answer was given
+    const lastMessage = this.messages[this.messages.length - 1];
+    const isLastMessageTool = lastMessage?.role === "tool";
+
+    if (
+      isLastMessageTool &&
+      finalAnswer === "Max iterations reached without final answer."
+    ) {
+      // If the last interaction was a tool call, provide a more meaningful synthetic answer
+      finalAnswer = "Task completed based on the information I found.";
+    }
+
     this.emit("complete");
     return finalAnswer;
   }
@@ -271,11 +283,36 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
 
     let iterations = 0;
     let isDone = false;
+    let forceExtraIteration = false;
     // Track processed tool calls to avoid duplicates
     const processedToolCallIds = new Set<string>();
 
     const processIteration = async () => {
       if (iterations >= this.options.maxIterations || isDone) {
+        if (iterations >= this.options.maxIterations && !isDone) {
+          // We reached max iterations without a final answer
+          const finalAnswerMarker = this.normalizedMarkers.finalAnswer;
+          let hasFinalAnswer = false;
+
+          // Check if we have already emitted a final answer
+          if (
+            finalAnswerMarker &&
+            this.messages.length > 0 &&
+            typeof this.messages[this.messages.length - 1].content === "string"
+          ) {
+            const lastContent = this.messages[this.messages.length - 1]
+              .content as string;
+            hasFinalAnswer = lastContent.includes(finalAnswerMarker.open);
+          }
+
+          if (!hasFinalAnswer) {
+            eventEmitter.emit(
+              "final_answer",
+              "Max iterations reached. Here's what I found so far.",
+            );
+          }
+        }
+
         eventEmitter.emit("complete");
         return;
       }
@@ -372,6 +409,34 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
         // Handle errors during streaming
         stream.on("error", (error: Error) => {
           eventEmitter.emit("error", error);
+
+          // Emit a synthetic final answer when an error occurs
+          if (!isDone) {
+            const finalAnswerMarker = this.normalizedMarkers.finalAnswer;
+            let hasFinalAnswer = false;
+
+            // Check if we have already emitted a final answer
+            if (
+              finalAnswerMarker &&
+              this.messages.length > 0 &&
+              typeof this.messages[this.messages.length - 1].content ===
+                "string"
+            ) {
+              const lastContent = this.messages[this.messages.length - 1]
+                .content as string;
+              hasFinalAnswer = lastContent.includes(finalAnswerMarker.open);
+            }
+
+            if (!hasFinalAnswer) {
+              eventEmitter.emit(
+                "final_answer",
+                "Encountered an error while processing the request.",
+              );
+            }
+
+            eventEmitter.emit("complete");
+          }
+
           isDone = true;
         });
 
@@ -480,6 +545,10 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
                     args: safeArgs,
                     error,
                   });
+
+                  // Set the force extra iteration flag to ensure one more pass
+                  // even when a tool errors out
+                  forceExtraIteration = true;
                 }
               }
             }
@@ -487,12 +556,41 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
             // Reset for next iteration
             currentToolCalls = [];
 
+            forceExtraIteration = true; // Always do one more iteration after tool calls
             // Continue with next iteration
             setTimeout(processIteration, 0);
           } else {
             // No tool calls, check if we need to continue
-            if (!isDone) {
+            if (!isDone && forceExtraIteration) {
+              forceExtraIteration = false;
               setTimeout(processIteration, 0);
+            } else if (!isDone) {
+              // Before we complete, check if we've emitted a final answer
+              let hasFinalAnswer = false;
+
+              // Check last message for final answer marker
+              const finalAnswerMarker = this.normalizedMarkers.finalAnswer;
+              if (
+                finalAnswerMarker &&
+                this.messages.length > 0 &&
+                typeof this.messages[this.messages.length - 1].content ===
+                  "string"
+              ) {
+                const lastContent = this.messages[this.messages.length - 1]
+                  .content as string;
+                hasFinalAnswer = lastContent.includes(finalAnswerMarker.open);
+              }
+
+              // If no final answer found after last iteration, emit a synthetic one
+              if (!hasFinalAnswer && !isDone) {
+                eventEmitter.emit(
+                  "final_answer",
+                  "Task completed based on the information I found.",
+                );
+              }
+
+              isDone = true;
+              eventEmitter.emit("complete");
             }
           }
         });

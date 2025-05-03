@@ -1,6 +1,24 @@
 // ! Generated file, do not modify by hand. See packages/openrouter/scripts/generate-models.ts
 
 export type RouterModel =
+  /** Microsoft: Phi 4 Reasoning Plus (free)
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
+  @context_length 32768
+  @url https://openrouter.ai/microsoft/phi-4-reasoning-plus:free
+  */
+  | "microsoft/phi-4-reasoning-plus:free"
+  /** Microsoft: Phi 4 Reasoning Plus
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, repetition_penalty, response_format, top_k, seed, min_p
+  @context_length 32768
+  @url https://openrouter.ai/microsoft/phi-4-reasoning-plus
+  */
+  | "microsoft/phi-4-reasoning-plus"
+  /** Microsoft: Phi 4 Reasoning (free)
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
+  @context_length 32768
+  @url https://openrouter.ai/microsoft/phi-4-reasoning:free
+  */
+  | "microsoft/phi-4-reasoning:free"
   /** Qwen: Qwen3 0.6B (free)
   @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias
   @context_length 32000
@@ -44,8 +62,8 @@ export type RouterModel =
   */
   | "deepseek/deepseek-prover-v2:free"
   /** DeepSeek: DeepSeek Prover V2
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias
-  @context_length 160000
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, response_format
+  @context_length 131072
   @url https://openrouter.ai/deepseek/deepseek-prover-v2
   */
   | "deepseek/deepseek-prover-v2"
@@ -62,7 +80,7 @@ export type RouterModel =
   */
   | "qwen/qwen3-30b-a3b:free"
   /** Qwen: Qwen3 30B A3B
-  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, presence_penalty, frequency_penalty, repetition_penalty, top_k, stop, response_format, seed, min_p, logit_bias, logprobs, top_logprobs
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, presence_penalty, frequency_penalty, repetition_penalty, top_k, stop, response_format, seed, min_p, logit_bias, tools, tool_choice, structured_outputs, logprobs, top_logprobs
   @context_length 40960
   @url https://openrouter.ai/qwen/qwen3-30b-a3b
   */
@@ -98,7 +116,7 @@ export type RouterModel =
   */
   | "qwen/qwen3-32b:free"
   /** Qwen: Qwen3 32B
-  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, repetition_penalty, response_format, top_k, seed, min_p, logit_bias, logprobs, top_logprobs
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, repetition_penalty, response_format, top_k, seed, min_p, logit_bias, tools, tool_choice, logprobs, top_logprobs
   @context_length 40960
   @url https://openrouter.ai/qwen/qwen3-32b
   */
@@ -110,8 +128,8 @@ export type RouterModel =
   */
   | "qwen/qwen3-235b-a22b:free"
   /** Qwen: Qwen3 235B A22B
-  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, presence_penalty, frequency_penalty, repetition_penalty, top_k, tools, tool_choice, stop, seed, min_p, logit_bias, response_format, logprobs, top_logprobs
-  @context_length 32768
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, presence_penalty, frequency_penalty, repetition_penalty, top_k, seed, stop, response_format, min_p, tools, tool_choice, logit_bias, structured_outputs, logprobs, top_logprobs
+  @context_length 40960
   @url https://openrouter.ai/qwen/qwen3-235b-a22b
   */
   | "qwen/qwen3-235b-a22b"
@@ -176,13 +194,13 @@ export type RouterModel =
   */
   | "thudm/glm-4-32b"
   /** Google: Gemini 2.5 Flash Preview
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, tools, tool_choice, stop, response_format, structured_outputs
   @context_length 1048576
   @url https://openrouter.ai/google/gemini-2.5-flash-preview
   */
   | "google/gemini-2.5-flash-preview"
   /** Google: Gemini 2.5 Flash Preview (thinking)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, tools, tool_choice, stop, response_format, structured_outputs
   @context_length 1048576
   @url https://openrouter.ai/google/gemini-2.5-flash-preview:thinking
   */
@@ -296,7 +314,7 @@ export type RouterModel =
   */
   | "nvidia/llama-3.1-nemotron-ultra-253b-v1:free"
   /** Meta: Llama 4 Maverick (free)
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
+  @capabilities max_tokens, temperature, top_p, structured_outputs, response_format, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
   @context_length 256000
   @url https://openrouter.ai/meta-llama/llama-4-maverick:free
   */
@@ -308,7 +326,7 @@ export type RouterModel =
   */
   | "meta-llama/llama-4-maverick"
   /** Meta: Llama 4 Scout (free)
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
+  @capabilities max_tokens, temperature, top_p, structured_outputs, response_format, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
   @context_length 512000
   @url https://openrouter.ai/meta-llama/llama-4-scout:free
   */
@@ -884,7 +902,7 @@ export type RouterModel =
   */
   | "cohere/command-r7b-12-2024"
   /** Google: Gemini 2.0 Flash Experimental (free)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, stop
   @context_length 1048576
   @url https://openrouter.ai/google/gemini-2.0-flash-exp:free
   */
@@ -896,7 +914,7 @@ export type RouterModel =
   */
   | "meta-llama/llama-3.3-70b-instruct:free"
   /** Meta: Llama 3.3 70B Instruct
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, top_k, tools, tool_choice, min_p, repetition_penalty, structured_outputs
   @context_length 128000
   @url https://openrouter.ai/meta-llama/llama-3.3-70b-instruct
   */
@@ -926,7 +944,7 @@ export type RouterModel =
   */
   | "qwen/qwq-32b-preview:free"
   /** Qwen: QwQ 32B Preview
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, logprobs, top_logprobs, seed, logit_bias, top_k, min_p, repetition_penalty, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, logprobs, top_logprobs, seed, logit_bias, top_k, min_p, repetition_penalty
   @context_length 32768
   @url https://openrouter.ai/qwen/qwq-32b-preview
   */
@@ -1009,18 +1027,6 @@ export type RouterModel =
   @url https://openrouter.ai/thedrummer/unslopnemo-12b
   */
   | "thedrummer/unslopnemo-12b"
-  /** Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
-  @context_length 200000
-  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022:beta
-  */
-  | "anthropic/claude-3.5-haiku-20241022:beta"
-  /** Anthropic: Claude 3.5 Haiku (2024-10-22)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
-  @context_length 200000
-  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022
-  */
-  | "anthropic/claude-3.5-haiku-20241022"
   /** Anthropic: Claude 3.5 Haiku (self-moderated)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
   @context_length 200000
@@ -1033,6 +1039,24 @@ export type RouterModel =
   @url https://openrouter.ai/anthropic/claude-3.5-haiku
   */
   | "anthropic/claude-3.5-haiku"
+  /** Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
+  @context_length 200000
+  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022:beta
+  */
+  | "anthropic/claude-3.5-haiku-20241022:beta"
+  /** Anthropic: Claude 3.5 Haiku (2024-10-22)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
+  @context_length 200000
+  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022
+  */
+  | "anthropic/claude-3.5-haiku-20241022"
+  /** NeverSleep: Lumimaid v0.2 70B
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, logit_bias, top_k, min_p, seed, top_a
+  @context_length 16384
+  @url https://openrouter.ai/neversleep/llama-3.1-lumimaid-70b
+  */
+  | "neversleep/llama-3.1-lumimaid-70b"
   /** Magnum v4 72B
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, top_k, min_p, seed, logit_bias, top_a
   @context_length 16384
@@ -1051,30 +1075,24 @@ export type RouterModel =
   @url https://openrouter.ai/anthropic/claude-3.5-sonnet
   */
   | "anthropic/claude-3.5-sonnet"
-  /** NeverSleep: Lumimaid v0.2 70B
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, logit_bias, top_k, min_p, seed, top_a
-  @context_length 16384
-  @url https://openrouter.ai/neversleep/llama-3.1-lumimaid-70b
-  */
-  | "neversleep/llama-3.1-lumimaid-70b"
   /** xAI: Grok Beta
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logprobs, top_logprobs, response_format
   @context_length 131072
   @url https://openrouter.ai/x-ai/grok-beta
   */
   | "x-ai/grok-beta"
-  /** Mistral: Ministral 3B
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
-  @context_length 131072
-  @url https://openrouter.ai/mistralai/ministral-3b
-  */
-  | "mistralai/ministral-3b"
   /** Mistral: Ministral 8B
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
   @context_length 128000
   @url https://openrouter.ai/mistralai/ministral-8b
   */
   | "mistralai/ministral-8b"
+  /** Mistral: Ministral 3B
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
+  @context_length 131072
+  @url https://openrouter.ai/mistralai/ministral-3b
+  */
+  | "mistralai/ministral-3b"
   /** Qwen2.5 7B Instruct (free)
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias
   @context_length 32768
@@ -1093,30 +1111,24 @@ export type RouterModel =
   @url https://openrouter.ai/nvidia/llama-3.1-nemotron-70b-instruct
   */
   | "nvidia/llama-3.1-nemotron-70b-instruct"
-  /** Inflection: Inflection 3 Pi
-  @capabilities max_tokens, temperature, top_p, stop
-  @context_length 8000
-  @url https://openrouter.ai/inflection/inflection-3-pi
-  */
-  | "inflection/inflection-3-pi"
   /** Inflection: Inflection 3 Productivity
   @capabilities max_tokens, temperature, top_p, stop
   @context_length 8000
   @url https://openrouter.ai/inflection/inflection-3-productivity
   */
   | "inflection/inflection-3-productivity"
+  /** Inflection: Inflection 3 Pi
+  @capabilities max_tokens, temperature, top_p, stop
+  @context_length 8000
+  @url https://openrouter.ai/inflection/inflection-3-pi
+  */
+  | "inflection/inflection-3-pi"
   /** Google: Gemini 1.5 Flash 8B
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, tools, tool_choice, seed, response_format, structured_outputs
   @context_length 1000000
   @url https://openrouter.ai/google/gemini-flash-1.5-8b
   */
   | "google/gemini-flash-1.5-8b"
-  /** Liquid: LFM 40B MoE
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, logprobs, top_logprobs, response_format
-  @context_length 32768
-  @url https://openrouter.ai/liquid/lfm-40b
-  */
-  | "liquid/lfm-40b"
   /** Rocinante 12B
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, top_k, min_p, seed, logit_bias
   @context_length 32768
@@ -1129,6 +1141,12 @@ export type RouterModel =
   @url https://openrouter.ai/anthracite-org/magnum-v2-72b
   */
   | "anthracite-org/magnum-v2-72b"
+  /** Liquid: LFM 40B MoE
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, logprobs, top_logprobs, response_format
+  @context_length 32768
+  @url https://openrouter.ai/liquid/lfm-40b
+  */
+  | "liquid/lfm-40b"
   /** Meta: Llama 3.2 3B Instruct (free)
   @capabilities max_tokens, temperature, top_p
   @context_length 20000
@@ -1141,18 +1159,6 @@ export type RouterModel =
   @url https://openrouter.ai/meta-llama/llama-3.2-3b-instruct
   */
   | "meta-llama/llama-3.2-3b-instruct"
-  /** Meta: Llama 3.2 11B Vision Instruct (free)
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format
-  @context_length 131072
-  @url https://openrouter.ai/meta-llama/llama-3.2-11b-vision-instruct:free
-  */
-  | "meta-llama/llama-3.2-11b-vision-instruct:free"
-  /** Meta: Llama 3.2 11B Vision Instruct
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, response_format, top_logprobs, logprobs
-  @context_length 131072
-  @url https://openrouter.ai/meta-llama/llama-3.2-11b-vision-instruct
-  */
-  | "meta-llama/llama-3.2-11b-vision-instruct"
   /** Meta: Llama 3.2 1B Instruct (free)
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias
   @context_length 131000
@@ -1166,11 +1172,23 @@ export type RouterModel =
   */
   | "meta-llama/llama-3.2-1b-instruct"
   /** Meta: Llama 3.2 90B Vision Instruct
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, response_format, structured_outputs, logit_bias, logprobs, top_logprobs, min_p, seed
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, seed
   @context_length 131072
   @url https://openrouter.ai/meta-llama/llama-3.2-90b-vision-instruct
   */
   | "meta-llama/llama-3.2-90b-vision-instruct"
+  /** Meta: Llama 3.2 11B Vision Instruct (free)
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format
+  @context_length 131072
+  @url https://openrouter.ai/meta-llama/llama-3.2-11b-vision-instruct:free
+  */
+  | "meta-llama/llama-3.2-11b-vision-instruct:free"
+  /** Meta: Llama 3.2 11B Vision Instruct
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, response_format, top_logprobs, logprobs
+  @context_length 131072
+  @url https://openrouter.ai/meta-llama/llama-3.2-11b-vision-instruct
+  */
+  | "meta-llama/llama-3.2-11b-vision-instruct"
   /** Qwen2.5 72B Instruct (free)
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
   @context_length 32768
@@ -1195,54 +1213,48 @@ export type RouterModel =
   @url https://openrouter.ai/neversleep/llama-3.1-lumimaid-8b
   */
   | "neversleep/llama-3.1-lumimaid-8b"
-  /** OpenAI: o1-mini
-  @capabilities seed, max_tokens
-  @context_length 128000
-  @url https://openrouter.ai/openai/o1-mini
-  */
-  | "openai/o1-mini"
   /** OpenAI: o1-preview
   @capabilities seed, max_tokens
   @context_length 128000
   @url https://openrouter.ai/openai/o1-preview
   */
   | "openai/o1-preview"
-  /** OpenAI: o1-mini (2024-09-12)
-  @capabilities seed, max_tokens
-  @context_length 128000
-  @url https://openrouter.ai/openai/o1-mini-2024-09-12
-  */
-  | "openai/o1-mini-2024-09-12"
   /** OpenAI: o1-preview (2024-09-12)
   @capabilities seed, max_tokens
   @context_length 128000
   @url https://openrouter.ai/openai/o1-preview-2024-09-12
   */
   | "openai/o1-preview-2024-09-12"
+  /** OpenAI: o1-mini
+  @capabilities seed, max_tokens
+  @context_length 128000
+  @url https://openrouter.ai/openai/o1-mini
+  */
+  | "openai/o1-mini"
+  /** OpenAI: o1-mini (2024-09-12)
+  @capabilities seed, max_tokens
+  @context_length 128000
+  @url https://openrouter.ai/openai/o1-mini-2024-09-12
+  */
+  | "openai/o1-mini-2024-09-12"
   /** Mistral: Pixtral 12B
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, logprobs, top_logprobs, seed, logit_bias, top_k, min_p, repetition_penalty, tools, tool_choice, response_format, structured_outputs
   @context_length 32768
   @url https://openrouter.ai/mistralai/pixtral-12b
   */
   | "mistralai/pixtral-12b"
-  /** Cohere: Command R (08-2024)
-  @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/cohere/command-r-08-2024
-  */
-  | "cohere/command-r-08-2024"
   /** Cohere: Command R+ (08-2024)
   @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
   @context_length 128000
   @url https://openrouter.ai/cohere/command-r-plus-08-2024
   */
   | "cohere/command-r-plus-08-2024"
-  /** Google: Gemini 1.5 Flash 8B Experimental
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
-  @context_length 1000000
-  @url https://openrouter.ai/google/gemini-flash-1.5-8b-exp
+  /** Cohere: Command R (08-2024)
+  @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/cohere/command-r-08-2024
   */
-  | "google/gemini-flash-1.5-8b-exp"
+  | "cohere/command-r-08-2024"
   /** Qwen: Qwen2.5-VL 7B Instruct (free)
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
   @context_length 64000
@@ -1261,18 +1273,24 @@ export type RouterModel =
   @url https://openrouter.ai/sao10k/l3.1-euryale-70b
   */
   | "sao10k/l3.1-euryale-70b"
-  /** AI21: Jamba 1.5 Large
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop
-  @context_length 256000
-  @url https://openrouter.ai/ai21/jamba-1-5-large
+  /** Google: Gemini 1.5 Flash 8B Experimental
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
+  @context_length 1000000
+  @url https://openrouter.ai/google/gemini-flash-1.5-8b-exp
   */
-  | "ai21/jamba-1-5-large"
+  | "google/gemini-flash-1.5-8b-exp"
   /** AI21: Jamba 1.5 Mini
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop
   @context_length 256000
   @url https://openrouter.ai/ai21/jamba-1-5-mini
   */
   | "ai21/jamba-1-5-mini"
+  /** AI21: Jamba 1.5 Large
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop
+  @context_length 256000
+  @url https://openrouter.ai/ai21/jamba-1-5-large
+  */
+  | "ai21/jamba-1-5-large"
   /** Microsoft: Phi-3.5 Mini 128K Instruct
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, logit_bias, logprobs, top_logprobs
   @context_length 131072
@@ -1297,30 +1315,24 @@ export type RouterModel =
   @url https://openrouter.ai/openai/chatgpt-4o-latest
   */
   | "openai/chatgpt-4o-latest"
-  /** Aetherwiing: Starcannon 12B
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, top_k, min_p, seed
-  @context_length 16384
-  @url https://openrouter.ai/aetherwiing/mn-starcannon-12b
-  */
-  | "aetherwiing/mn-starcannon-12b"
   /** Sao10K: Llama 3 8B Lunaris
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, response_format
   @context_length 8192
   @url https://openrouter.ai/sao10k/l3-lunaris-8b
   */
   | "sao10k/l3-lunaris-8b"
+  /** Aetherwiing: Starcannon 12B
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, top_k, min_p, seed
+  @context_length 16384
+  @url https://openrouter.ai/aetherwiing/mn-starcannon-12b
+  */
+  | "aetherwiing/mn-starcannon-12b"
   /** OpenAI: GPT-4o (2024-08-06)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 128000
   @url https://openrouter.ai/openai/gpt-4o-2024-08-06
   */
   | "openai/gpt-4o-2024-08-06"
-  /** Mistral Nemo 12B Celeste
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, top_k, min_p, seed
-  @context_length 16384
-  @url https://openrouter.ai/nothingiisreal/mn-celeste-12b
-  */
-  | "nothingiisreal/mn-celeste-12b"
   /** Meta: Llama 3.1 405B (base) (free)
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
   @context_length 64000
@@ -1333,18 +1345,24 @@ export type RouterModel =
   @url https://openrouter.ai/meta-llama/llama-3.1-405b
   */
   | "meta-llama/llama-3.1-405b"
-  /** Perplexity: Llama 3.1 Sonar 70B Online
-  @capabilities max_tokens, temperature, top_p, top_k, frequency_penalty, presence_penalty
-  @context_length 127072
-  @url https://openrouter.ai/perplexity/llama-3.1-sonar-large-128k-online
+  /** Mistral Nemo 12B Celeste
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, top_k, min_p, seed
+  @context_length 16384
+  @url https://openrouter.ai/nothingiisreal/mn-celeste-12b
   */
-  | "perplexity/llama-3.1-sonar-large-128k-online"
+  | "nothingiisreal/mn-celeste-12b"
   /** Perplexity: Llama 3.1 Sonar 8B Online
   @capabilities max_tokens, temperature, top_p, top_k, frequency_penalty, presence_penalty
   @context_length 127072
   @url https://openrouter.ai/perplexity/llama-3.1-sonar-small-128k-online
   */
   | "perplexity/llama-3.1-sonar-small-128k-online"
+  /** Perplexity: Llama 3.1 Sonar 70B Online
+  @capabilities max_tokens, temperature, top_p, top_k, frequency_penalty, presence_penalty
+  @context_length 127072
+  @url https://openrouter.ai/perplexity/llama-3.1-sonar-large-128k-online
+  */
+  | "perplexity/llama-3.1-sonar-large-128k-online"
   /** Meta: Llama 3.1 8B Instruct (free)
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed
   @context_length 131072
@@ -1369,6 +1387,12 @@ export type RouterModel =
   @url https://openrouter.ai/meta-llama/llama-3.1-70b-instruct
   */
   | "meta-llama/llama-3.1-70b-instruct"
+  /** Mistral: Codestral Mamba
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, seed
+  @context_length 262144
+  @url https://openrouter.ai/mistralai/codestral-mamba
+  */
+  | "mistralai/codestral-mamba"
   /** Mistral: Mistral Nemo (free)
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logprobs, logit_bias, top_logprobs
   @context_length 128000
@@ -1381,24 +1405,18 @@ export type RouterModel =
   @url https://openrouter.ai/mistralai/mistral-nemo
   */
   | "mistralai/mistral-nemo"
-  /** Mistral: Codestral Mamba
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, seed
-  @context_length 262144
-  @url https://openrouter.ai/mistralai/codestral-mamba
-  */
-  | "mistralai/codestral-mamba"
-  /** OpenAI: GPT-4o-mini (2024-07-18)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4o-mini-2024-07-18
-  */
-  | "openai/gpt-4o-mini-2024-07-18"
   /** OpenAI: GPT-4o-mini
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs, tools, tool_choice
   @context_length 128000
   @url https://openrouter.ai/openai/gpt-4o-mini
   */
   | "openai/gpt-4o-mini"
+  /** OpenAI: GPT-4o-mini (2024-07-18)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4o-mini-2024-07-18
+  */
+  | "openai/gpt-4o-mini-2024-07-18"
   /** Google: Gemma 2 27B
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, seed, logprobs, top_logprobs
   @context_length 8192
@@ -1423,18 +1441,18 @@ export type RouterModel =
   @url https://openrouter.ai/google/gemma-2-9b-it
   */
   | "google/gemma-2-9b-it"
-  /** AI21: Jamba Instruct
-  @capabilities max_tokens, temperature, top_p, stop
-  @context_length 256000
-  @url https://openrouter.ai/ai21/jamba-instruct
-  */
-  | "ai21/jamba-instruct"
   /** 01.AI: Yi Large
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, response_format, structured_outputs, logit_bias, logprobs, top_logprobs
   @context_length 32768
   @url https://openrouter.ai/01-ai/yi-large
   */
   | "01-ai/yi-large"
+  /** AI21: Jamba Instruct
+  @capabilities max_tokens, temperature, top_p, stop
+  @context_length 256000
+  @url https://openrouter.ai/ai21/jamba-instruct
+  */
+  | "ai21/jamba-instruct"
   /** Anthropic: Claude 3.5 Sonnet (2024-06-20) (self-moderated)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
   @context_length 200000
@@ -1465,12 +1483,6 @@ export type RouterModel =
   @url https://openrouter.ai/qwen/qwen-2-72b-instruct
   */
   | "qwen/qwen-2-72b-instruct"
-  /** NousResearch: Hermes 2 Pro - Llama-3 8B
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, top_k, min_p, repetition_penalty
-  @context_length 131072
-  @url https://openrouter.ai/nousresearch/hermes-2-pro-llama-3-8b
-  */
-  | "nousresearch/hermes-2-pro-llama-3-8b"
   /** Mistral: Mistral 7B Instruct (free)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, response_format, top_k, seed, min_p
   @context_length 32768
@@ -1483,6 +1495,12 @@ export type RouterModel =
   @url https://openrouter.ai/mistralai/mistral-7b-instruct
   */
   | "mistralai/mistral-7b-instruct"
+  /** NousResearch: Hermes 2 Pro - Llama-3 8B
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, top_k, min_p, repetition_penalty
+  @context_length 131072
+  @url https://openrouter.ai/nousresearch/hermes-2-pro-llama-3-8b
+  */
+  | "nousresearch/hermes-2-pro-llama-3-8b"
   /** Mistral: Mistral 7B Instruct v0.3
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, seed, tools, tool_choice, logprobs
   @context_length 32768
@@ -1519,18 +1537,6 @@ export type RouterModel =
   @url https://openrouter.ai/google/gemini-flash-1.5
   */
   | "google/gemini-flash-1.5"
-  /** Meta: LlamaGuard 2 8B
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format
-  @context_length 8192
-  @url https://openrouter.ai/meta-llama/llama-guard-2-8b
-  */
-  | "meta-llama/llama-guard-2-8b"
-  /** OpenAI: GPT-4o (2024-05-13)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4o-2024-05-13
-  */
-  | "openai/gpt-4o-2024-05-13"
   /** OpenAI: GPT-4o
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 128000
@@ -1543,6 +1549,18 @@ export type RouterModel =
   @url https://openrouter.ai/openai/gpt-4o:extended
   */
   | "openai/gpt-4o:extended"
+  /** Meta: LlamaGuard 2 8B
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format
+  @context_length 8192
+  @url https://openrouter.ai/meta-llama/llama-guard-2-8b
+  */
+  | "meta-llama/llama-guard-2-8b"
+  /** OpenAI: GPT-4o (2024-05-13)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4o-2024-05-13
+  */
+  | "openai/gpt-4o-2024-05-13"
   /** OLMo 7B Instruct
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, logit_bias, logprobs, top_logprobs
   @context_length 2048
@@ -1574,7 +1592,7 @@ export type RouterModel =
   */
   | "meta-llama/llama-3-8b-instruct"
   /** Meta: Llama 3 70B Instruct
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, response_format, structured_outputs, logit_bias, logprobs, top_logprobs, min_p, seed, tools, tool_choice
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, top_logprobs, logprobs, seed, tools, tool_choice
   @context_length 8192
   @url https://openrouter.ai/meta-llama/llama-3-70b-instruct
   */
@@ -1591,18 +1609,18 @@ export type RouterModel =
   @url https://openrouter.ai/microsoft/wizardlm-2-8x22b
   */
   | "microsoft/wizardlm-2-8x22b"
-  /** OpenAI: GPT-4 Turbo
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4-turbo
-  */
-  | "openai/gpt-4-turbo"
   /** Google: Gemini 1.5 Pro
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, tools, tool_choice, seed, response_format, structured_outputs
   @context_length 2000000
   @url https://openrouter.ai/google/gemini-pro-1.5
   */
   | "google/gemini-pro-1.5"
+  /** OpenAI: GPT-4 Turbo
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4-turbo
+  */
+  | "openai/gpt-4-turbo"
   /** Cohere: Command R+
   @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
   @context_length 128000
@@ -1699,6 +1717,12 @@ export type RouterModel =
   @url https://openrouter.ai/nousresearch/nous-hermes-2-mixtral-8x7b-dpo
   */
   | "nousresearch/nous-hermes-2-mixtral-8x7b-dpo"
+  /** Mistral Medium
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
+  @context_length 32768
+  @url https://openrouter.ai/mistralai/mistral-medium
+  */
+  | "mistralai/mistral-medium"
   /** Mistral Small
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
   @context_length 32768
@@ -1711,12 +1735,6 @@ export type RouterModel =
   @url https://openrouter.ai/mistralai/mistral-tiny
   */
   | "mistralai/mistral-tiny"
-  /** Mistral Medium
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
-  @context_length 32768
-  @url https://openrouter.ai/mistralai/mistral-medium
-  */
-  | "mistralai/mistral-medium"
   /** Mistral: Mistral 7B Instruct v0.2
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format
   @context_length 32768
@@ -1741,18 +1759,6 @@ export type RouterModel =
   @url https://openrouter.ai/neversleep/noromaid-20b
   */
   | "neversleep/noromaid-20b"
-  /** Anthropic: Claude v2 (self-moderated)
-  @capabilities max_tokens, temperature, top_p, top_k, stop
-  @context_length 200000
-  @url https://openrouter.ai/anthropic/claude-2:beta
-  */
-  | "anthropic/claude-2:beta"
-  /** Anthropic: Claude v2
-  @capabilities max_tokens, temperature, top_p, top_k, stop
-  @context_length 200000
-  @url https://openrouter.ai/anthropic/claude-2
-  */
-  | "anthropic/claude-2"
   /** Anthropic: Claude v2.1 (self-moderated)
   @capabilities max_tokens, temperature, top_p, top_k, stop
   @context_length 200000
@@ -1765,6 +1771,18 @@ export type RouterModel =
   @url https://openrouter.ai/anthropic/claude-2.1
   */
   | "anthropic/claude-2.1"
+  /** Anthropic: Claude v2 (self-moderated)
+  @capabilities max_tokens, temperature, top_p, top_k, stop
+  @context_length 200000
+  @url https://openrouter.ai/anthropic/claude-2:beta
+  */
+  | "anthropic/claude-2:beta"
+  /** Anthropic: Claude v2
+  @capabilities max_tokens, temperature, top_p, top_k, stop
+  @context_length 200000
+  @url https://openrouter.ai/anthropic/claude-2
+  */
+  | "anthropic/claude-2"
   /** Toppy M 7B
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, top_k, min_p, seed
   @context_length 4096
@@ -1783,18 +1801,18 @@ export type RouterModel =
   @url https://openrouter.ai/openrouter/auto
   */
   | "openrouter/auto"
-  /** OpenAI: GPT-4 Turbo (older v1106)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4-1106-preview
-  */
-  | "openai/gpt-4-1106-preview"
   /** OpenAI: GPT-3.5 Turbo 16k (older v1106)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 16385
   @url https://openrouter.ai/openai/gpt-3.5-turbo-1106
   */
   | "openai/gpt-3.5-turbo-1106"
+  /** OpenAI: GPT-4 Turbo (older v1106)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4-1106-preview
+  */
+  | "openai/gpt-4-1106-preview"
   /** Google: PaLM 2 Chat 32k
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, response_format
   @context_length 32768
@@ -1813,36 +1831,36 @@ export type RouterModel =
   @url https://openrouter.ai/jondurbin/airoboros-l2-70b
   */
   | "jondurbin/airoboros-l2-70b"
-  /** Mistral: Mistral 7B Instruct v0.1
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, seed
-  @context_length 2824
-  @url https://openrouter.ai/mistralai/mistral-7b-instruct-v0.1
-  */
-  | "mistralai/mistral-7b-instruct-v0.1"
   /** OpenAI: GPT-3.5 Turbo Instruct
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
   @context_length 4095
   @url https://openrouter.ai/openai/gpt-3.5-turbo-instruct
   */
   | "openai/gpt-3.5-turbo-instruct"
+  /** Mistral: Mistral 7B Instruct v0.1
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, seed
+  @context_length 2824
+  @url https://openrouter.ai/mistralai/mistral-7b-instruct-v0.1
+  */
+  | "mistralai/mistral-7b-instruct-v0.1"
   /** Pygmalion: Mythalion 13B
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, repetition_penalty, logit_bias, top_k, min_p, seed, top_a
   @context_length 8192
   @url https://openrouter.ai/pygmalionai/mythalion-13b
   */
   | "pygmalionai/mythalion-13b"
-  /** OpenAI: GPT-4 32k
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
-  @context_length 32767
-  @url https://openrouter.ai/openai/gpt-4-32k
-  */
-  | "openai/gpt-4-32k"
   /** OpenAI: GPT-3.5 Turbo 16k
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
   @context_length 16385
   @url https://openrouter.ai/openai/gpt-3.5-turbo-16k
   */
   | "openai/gpt-3.5-turbo-16k"
+  /** OpenAI: GPT-4 32k
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
+  @context_length 32767
+  @url https://openrouter.ai/openai/gpt-4-32k
+  */
+  | "openai/gpt-4-32k"
   /** OpenAI: GPT-4 32k (older v0314)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 32767
@@ -1903,6 +1921,12 @@ export type RouterModel =
   @url https://openrouter.ai/meta-llama/llama-2-70b-chat
   */
   | "meta-llama/llama-2-70b-chat"
+  /** OpenAI: GPT-3.5 Turbo
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
+  @context_length 16385
+  @url https://openrouter.ai/openai/gpt-3.5-turbo
+  */
+  | "openai/gpt-3.5-turbo"
   /** OpenAI: GPT-3.5 Turbo 16k
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
   @context_length 16385
@@ -1915,12 +1939,6 @@ export type RouterModel =
   @url https://openrouter.ai/openai/gpt-4
   */
   | "openai/gpt-4"
-  /** OpenAI: GPT-3.5 Turbo
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
-  @context_length 16385
-  @url https://openrouter.ai/openai/gpt-3.5-turbo
-  */
-  | "openai/gpt-3.5-turbo"
   /** OpenAI: GPT-4 (older v0314)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 8191
@@ -1930,9 +1948,21 @@ export type RouterModel =
   | (string & {});
 
 export const toolCallingModels = [
+  /** Qwen: Qwen3 30B A3B
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, presence_penalty, frequency_penalty, repetition_penalty, top_k, stop, response_format, seed, min_p, logit_bias, tools, tool_choice, structured_outputs, logprobs, top_logprobs
+  @context_length 40960
+  @url https://openrouter.ai/qwen/qwen3-30b-a3b
+  */
+  "qwen/qwen3-30b-a3b",
+  /** Qwen: Qwen3 32B
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, repetition_penalty, response_format, top_k, seed, min_p, logit_bias, tools, tool_choice, logprobs, top_logprobs
+  @context_length 40960
+  @url https://openrouter.ai/qwen/qwen3-32b
+  */
+  "qwen/qwen3-32b",
   /** Qwen: Qwen3 235B A22B
-  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, presence_penalty, frequency_penalty, repetition_penalty, top_k, tools, tool_choice, stop, seed, min_p, logit_bias, response_format, logprobs, top_logprobs
-  @context_length 32768
+  @capabilities max_tokens, temperature, top_p, reasoning, include_reasoning, presence_penalty, frequency_penalty, repetition_penalty, top_k, seed, stop, response_format, min_p, tools, tool_choice, logit_bias, structured_outputs, logprobs, top_logprobs
+  @context_length 40960
   @url https://openrouter.ai/qwen/qwen3-235b-a22b
   */
   "qwen/qwen3-235b-a22b",
@@ -1943,13 +1973,13 @@ export const toolCallingModels = [
   */
   "google/gemini-2.5-pro-preview-03-25",
   /** Google: Gemini 2.5 Flash Preview
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, tools, tool_choice, stop, response_format, structured_outputs
   @context_length 1048576
   @url https://openrouter.ai/google/gemini-2.5-flash-preview
   */
   "google/gemini-2.5-flash-preview",
   /** Google: Gemini 2.5 Flash Preview (thinking)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, reasoning, include_reasoning, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, tools, tool_choice, stop, response_format, structured_outputs
   @context_length 1048576
   @url https://openrouter.ai/google/gemini-2.5-flash-preview:thinking
   */
@@ -2182,14 +2212,8 @@ export const toolCallingModels = [
   @url https://openrouter.ai/x-ai/grok-2-1212
   */
   "x-ai/grok-2-1212",
-  /** Google: Gemini 2.0 Flash Experimental (free)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
-  @context_length 1048576
-  @url https://openrouter.ai/google/gemini-2.0-flash-exp:free
-  */
-  "google/gemini-2.0-flash-exp:free",
   /** Meta: Llama 3.3 70B Instruct
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, min_p, repetition_penalty, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, top_k, tools, tool_choice, min_p, repetition_penalty, structured_outputs
   @context_length 128000
   @url https://openrouter.ai/meta-llama/llama-3.3-70b-instruct
   */
@@ -2236,18 +2260,6 @@ export const toolCallingModels = [
   @url https://openrouter.ai/mistralai/pixtral-large-2411
   */
   "mistralai/pixtral-large-2411",
-  /** Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
-  @context_length 200000
-  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022:beta
-  */
-  "anthropic/claude-3.5-haiku-20241022:beta",
-  /** Anthropic: Claude 3.5 Haiku (2024-10-22)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
-  @context_length 200000
-  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022
-  */
-  "anthropic/claude-3.5-haiku-20241022",
   /** Anthropic: Claude 3.5 Haiku (self-moderated)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
   @context_length 200000
@@ -2260,6 +2272,18 @@ export const toolCallingModels = [
   @url https://openrouter.ai/anthropic/claude-3.5-haiku
   */
   "anthropic/claude-3.5-haiku",
+  /** Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
+  @context_length 200000
+  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022:beta
+  */
+  "anthropic/claude-3.5-haiku-20241022:beta",
+  /** Anthropic: Claude 3.5 Haiku (2024-10-22)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
+  @context_length 200000
+  @url https://openrouter.ai/anthropic/claude-3.5-haiku-20241022
+  */
+  "anthropic/claude-3.5-haiku-20241022",
   /** Anthropic: Claude 3.5 Sonnet (self-moderated)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
   @context_length 200000
@@ -2278,18 +2302,18 @@ export const toolCallingModels = [
   @url https://openrouter.ai/x-ai/grok-beta
   */
   "x-ai/grok-beta",
-  /** Mistral: Ministral 3B
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
-  @context_length 131072
-  @url https://openrouter.ai/mistralai/ministral-3b
-  */
-  "mistralai/ministral-3b",
   /** Mistral: Ministral 8B
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
   @context_length 128000
   @url https://openrouter.ai/mistralai/ministral-8b
   */
   "mistralai/ministral-8b",
+  /** Mistral: Ministral 3B
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
+  @context_length 131072
+  @url https://openrouter.ai/mistralai/ministral-3b
+  */
+  "mistralai/ministral-3b",
   /** NVIDIA: Llama 3.1 Nemotron 70B Instruct
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, top_k, repetition_penalty, min_p, tools, tool_choice
   @context_length 131072
@@ -2320,36 +2344,36 @@ export const toolCallingModels = [
   @url https://openrouter.ai/mistralai/pixtral-12b
   */
   "mistralai/pixtral-12b",
-  /** Cohere: Command R (08-2024)
-  @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/cohere/command-r-08-2024
-  */
-  "cohere/command-r-08-2024",
   /** Cohere: Command R+ (08-2024)
   @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
   @context_length 128000
   @url https://openrouter.ai/cohere/command-r-plus-08-2024
   */
   "cohere/command-r-plus-08-2024",
+  /** Cohere: Command R (08-2024)
+  @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/cohere/command-r-08-2024
+  */
+  "cohere/command-r-08-2024",
   /** Google: Gemini 1.5 Flash 8B Experimental
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, response_format, structured_outputs
   @context_length 1000000
   @url https://openrouter.ai/google/gemini-flash-1.5-8b-exp
   */
   "google/gemini-flash-1.5-8b-exp",
-  /** AI21: Jamba 1.5 Large
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop
-  @context_length 256000
-  @url https://openrouter.ai/ai21/jamba-1-5-large
-  */
-  "ai21/jamba-1-5-large",
   /** AI21: Jamba 1.5 Mini
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop
   @context_length 256000
   @url https://openrouter.ai/ai21/jamba-1-5-mini
   */
   "ai21/jamba-1-5-mini",
+  /** AI21: Jamba 1.5 Large
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop
+  @context_length 256000
+  @url https://openrouter.ai/ai21/jamba-1-5-large
+  */
+  "ai21/jamba-1-5-large",
   /** Microsoft: Phi-3.5 Mini 128K Instruct
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, logit_bias, logprobs, top_logprobs
   @context_length 131072
@@ -2386,30 +2410,30 @@ export const toolCallingModels = [
   @url https://openrouter.ai/meta-llama/llama-3.1-70b-instruct
   */
   "meta-llama/llama-3.1-70b-instruct",
-  /** Mistral: Mistral Nemo
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, logit_bias, logprobs, top_logprobs, tools, tool_choice, response_format, structured_outputs, repetition_penalty, min_p
-  @context_length 98304
-  @url https://openrouter.ai/mistralai/mistral-nemo
-  */
-  "mistralai/mistral-nemo",
   /** Mistral: Codestral Mamba
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, seed
   @context_length 262144
   @url https://openrouter.ai/mistralai/codestral-mamba
   */
   "mistralai/codestral-mamba",
-  /** OpenAI: GPT-4o-mini (2024-07-18)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4o-mini-2024-07-18
+  /** Mistral: Mistral Nemo
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, top_k, logit_bias, logprobs, top_logprobs, tools, tool_choice, response_format, structured_outputs, repetition_penalty, min_p
+  @context_length 98304
+  @url https://openrouter.ai/mistralai/mistral-nemo
   */
-  "openai/gpt-4o-mini-2024-07-18",
+  "mistralai/mistral-nemo",
   /** OpenAI: GPT-4o-mini
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs, tools, tool_choice
   @context_length 128000
   @url https://openrouter.ai/openai/gpt-4o-mini
   */
   "openai/gpt-4o-mini",
+  /** OpenAI: GPT-4o-mini (2024-07-18)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4o-mini-2024-07-18
+  */
+  "openai/gpt-4o-mini-2024-07-18",
   /** Anthropic: Claude 3.5 Sonnet (2024-06-20) (self-moderated)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, top_k, stop
   @context_length 200000
@@ -2458,12 +2482,6 @@ export const toolCallingModels = [
   @url https://openrouter.ai/google/gemini-flash-1.5
   */
   "google/gemini-flash-1.5",
-  /** OpenAI: GPT-4o (2024-05-13)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4o-2024-05-13
-  */
-  "openai/gpt-4o-2024-05-13",
   /** OpenAI: GPT-4o
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 128000
@@ -2476,6 +2494,12 @@ export const toolCallingModels = [
   @url https://openrouter.ai/openai/gpt-4o:extended
   */
   "openai/gpt-4o:extended",
+  /** OpenAI: GPT-4o (2024-05-13)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, web_search_options, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4o-2024-05-13
+  */
+  "openai/gpt-4o-2024-05-13",
   /** Meta: Llama 3 8B Instruct
   @capabilities max_tokens, temperature, top_p, top_k, seed, repetition_penalty, frequency_penalty, presence_penalty, stop, min_p, logit_bias, tools, tool_choice, response_format, top_logprobs, logprobs, top_a
   @context_length 8192
@@ -2483,7 +2507,7 @@ export const toolCallingModels = [
   */
   "meta-llama/llama-3-8b-instruct",
   /** Meta: Llama 3 70B Instruct
-  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, response_format, structured_outputs, logit_bias, logprobs, top_logprobs, min_p, seed, tools, tool_choice
+  @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, top_logprobs, logprobs, seed, tools, tool_choice
   @context_length 8192
   @url https://openrouter.ai/meta-llama/llama-3-70b-instruct
   */
@@ -2494,18 +2518,18 @@ export const toolCallingModels = [
   @url https://openrouter.ai/mistralai/mixtral-8x22b-instruct
   */
   "mistralai/mixtral-8x22b-instruct",
-  /** OpenAI: GPT-4 Turbo
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4-turbo
-  */
-  "openai/gpt-4-turbo",
   /** Google: Gemini 1.5 Pro
   @capabilities max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, tools, tool_choice, seed, response_format, structured_outputs
   @context_length 2000000
   @url https://openrouter.ai/google/gemini-pro-1.5
   */
   "google/gemini-pro-1.5",
+  /** OpenAI: GPT-4 Turbo
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4-turbo
+  */
+  "openai/gpt-4-turbo",
   /** Cohere: Command R+
   @capabilities tools, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, seed, response_format, structured_outputs
   @context_length 128000
@@ -2584,6 +2608,12 @@ export const toolCallingModels = [
   @url https://openrouter.ai/openai/gpt-4-turbo-preview
   */
   "openai/gpt-4-turbo-preview",
+  /** Mistral Medium
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
+  @context_length 32768
+  @url https://openrouter.ai/mistralai/mistral-medium
+  */
+  "mistralai/mistral-medium",
   /** Mistral Small
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
   @context_length 32768
@@ -2596,54 +2626,54 @@ export const toolCallingModels = [
   @url https://openrouter.ai/mistralai/mistral-tiny
   */
   "mistralai/mistral-tiny",
-  /** Mistral Medium
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, response_format, structured_outputs, seed
-  @context_length 32768
-  @url https://openrouter.ai/mistralai/mistral-medium
-  */
-  "mistralai/mistral-medium",
   /** Mistral: Mixtral 8x7B Instruct
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, seed, logprobs, top_logprobs
   @context_length 32768
   @url https://openrouter.ai/mistralai/mixtral-8x7b-instruct
   */
   "mistralai/mixtral-8x7b-instruct",
-  /** OpenAI: GPT-4 Turbo (older v1106)
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
-  @context_length 128000
-  @url https://openrouter.ai/openai/gpt-4-1106-preview
-  */
-  "openai/gpt-4-1106-preview",
   /** OpenAI: GPT-3.5 Turbo 16k (older v1106)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 16385
   @url https://openrouter.ai/openai/gpt-3.5-turbo-1106
   */
   "openai/gpt-3.5-turbo-1106",
+  /** OpenAI: GPT-4 Turbo (older v1106)
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
+  @context_length 128000
+  @url https://openrouter.ai/openai/gpt-4-1106-preview
+  */
+  "openai/gpt-4-1106-preview",
   /** Mistral: Mistral 7B Instruct v0.1
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, top_k, repetition_penalty, logit_bias, min_p, response_format, seed
   @context_length 2824
   @url https://openrouter.ai/mistralai/mistral-7b-instruct-v0.1
   */
   "mistralai/mistral-7b-instruct-v0.1",
-  /** OpenAI: GPT-4 32k
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
-  @context_length 32767
-  @url https://openrouter.ai/openai/gpt-4-32k
-  */
-  "openai/gpt-4-32k",
   /** OpenAI: GPT-3.5 Turbo 16k
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
   @context_length 16385
   @url https://openrouter.ai/openai/gpt-3.5-turbo-16k
   */
   "openai/gpt-3.5-turbo-16k",
+  /** OpenAI: GPT-4 32k
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
+  @context_length 32767
+  @url https://openrouter.ai/openai/gpt-4-32k
+  */
+  "openai/gpt-4-32k",
   /** OpenAI: GPT-4 32k (older v0314)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 32767
   @url https://openrouter.ai/openai/gpt-4-32k-0314
   */
   "openai/gpt-4-32k-0314",
+  /** OpenAI: GPT-3.5 Turbo
+  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
+  @context_length 16385
+  @url https://openrouter.ai/openai/gpt-3.5-turbo
+  */
+  "openai/gpt-3.5-turbo",
   /** OpenAI: GPT-3.5 Turbo 16k
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
   @context_length 16385
@@ -2656,12 +2686,6 @@ export const toolCallingModels = [
   @url https://openrouter.ai/openai/gpt-4
   */
   "openai/gpt-4",
-  /** OpenAI: GPT-3.5 Turbo
-  @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format
-  @context_length 16385
-  @url https://openrouter.ai/openai/gpt-3.5-turbo
-  */
-  "openai/gpt-3.5-turbo",
   /** OpenAI: GPT-4 (older v0314)
   @capabilities tools, tool_choice, max_tokens, temperature, top_p, stop, frequency_penalty, presence_penalty, seed, logit_bias, logprobs, top_logprobs, response_format, structured_outputs
   @context_length 8191

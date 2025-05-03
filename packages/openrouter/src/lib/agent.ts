@@ -176,7 +176,7 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
             finalAnswer = lastMessage.content;
           }
         } else {
-          finalAnswer = "Received non-string content as final answer.";
+          finalAnswer = "RECEIVED_NON_STRING_FINAL_ANSWER";
         }
 
         break;
@@ -246,7 +246,7 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
     }
 
     if (finalAnswer === null) {
-      finalAnswer = "Max iterations reached without final answer.";
+      finalAnswer = "MAX_ITERATIONS_REACHED_WITHOUT_FINAL_ANSWER";
     }
 
     // Check if the last message was from a tool and no final answer was given
@@ -255,10 +255,9 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
 
     if (
       isLastMessageTool &&
-      finalAnswer === "Max iterations reached without final answer."
+      finalAnswer === "MAX_ITERATIONS_REACHED_WITHOUT_FINAL_ANSWER"
     ) {
-      // If the last interaction was a tool call, provide a more meaningful synthetic answer
-      finalAnswer = "Task completed based on the information I found.";
+      finalAnswer = "ANSWER_AFTER_TOOL_NOT_GIVEN";
     }
 
     this.emit("complete");
@@ -308,7 +307,7 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
           if (!hasFinalAnswer) {
             eventEmitter.emit(
               "final_answer",
-              "Max iterations reached. Here's what I found so far.",
+              "MAX_ITERATIONS_REACHED_WITHOUT_FINAL_ANSWER",
             );
           }
         }
@@ -585,7 +584,7 @@ Use ONLY these markers for structuring your responses. Only use ${finalAnswerMar
               if (!hasFinalAnswer && !isDone) {
                 eventEmitter.emit(
                   "final_answer",
-                  "Task completed based on the information I found.",
+                  "ANSWER_AFTER_TOOL_NOT_GIVEN",
                 );
               }
 

@@ -11,7 +11,7 @@ A fully typed, streaming-capable OpenRouter API client that makes working with A
 - Built-in error handling with pretty messages 💝
 - Automatic retries and fallbacks across providers 🔄
 - Provider preferences and routing control 🛣️
-- Chain-of-thought Agent for complex reasoning tasks 🧠✨
+- Chain-of-thought Agent for complex reasoning tasks 🧠✨ (alpha)
 
 ## Installation
 
@@ -135,7 +135,7 @@ const response = await client.chatCompletion({
 });
 ```
 
-## Smart Agent Mode (=ↀωↀ=)✧
+## Smart Agent Mode (=ↀωↀ=)✧ - Alpha
 
 _perks up ears and wiggles whiskers_
 

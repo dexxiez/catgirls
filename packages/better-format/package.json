@@ -1,0 +1,41 @@
+{
+  "name": "@catgirls/better-format",
+  "version": "0.0.1",
+  "description": "Make strings actually look good.",
+  "author": "Dezziez",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "clean": "rm -rf dist node_modules",
+    "publish-pkg": "pnpm build && pnpm publish --access public"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "3.2.4",
+    "@vitest/ui": "3.2.4",
+    "ts-node": "^10.9.2",
+    "vitest": "3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dexxiez/catgirls.git",
+    "directory": "packages/better-format"
+  },
+  "keywords": [
+    "uwu",
+    "catgirl",
+    "format",
+    "string formatter",
+    "titles",
+    "text",
+    "capitalize"
+  ]
+}

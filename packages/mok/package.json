@@ -39,6 +39,6 @@
     "data generator"
   ],
   "dependencies": {
-    "@faker-js/faker": "9.7.0"
+    "@faker-js/faker": "9.9.0"
   }
 }

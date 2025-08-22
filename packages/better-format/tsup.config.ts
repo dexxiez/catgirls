@@ -1,6 +1,6 @@
 import { defineConfig } from "tsup";
 export default defineConfig({
-  entry: ["src/index.ts"],
+  entry: ["src/index.ts", "src/angular.ts"],
   format: ["cjs", "esm"],
   dts: {
     compilerOptions: {
@@ -14,4 +14,5 @@ export default defineConfig({
   splitting: true,
   treeshake: true,
   clean: true,
+  external: ["@angular/core"],
 });

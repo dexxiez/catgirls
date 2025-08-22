@@ -1,6 +1,6 @@
 {
   "name": "@catgirls/better-format",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Make strings actually look good.",
   "author": "Dezziez",
   "license": "MIT",
@@ -10,6 +10,26 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./angular": {
+      "types": "./dist/angular.d.ts",
+      "import": "./dist/angular.mjs",
+      "require": "./dist/angular.js"
+    }
+  },
+  "peerDependencies": {
+    "@angular/core": ">=19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@angular/core": {
+      "optional": true
+    }
+  },
   "scripts": {
     "build": "tsup",
     "test": "vitest run",
@@ -19,6 +39,7 @@
     "publish-pkg": "pnpm build && pnpm publish --access public"
   },
   "devDependencies": {
+    "@angular/core": "^20.0.0",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
     "ts-node": "^10.9.2",
